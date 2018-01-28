@@ -12,7 +12,7 @@ public class EventTeamData : MonoBehaviour {
 
     public EventDropdown eventDropdown;
     public TeamDropdown teamDropdown;
-
+ 
     public void Start()
     {
         if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "data.json"))
@@ -51,9 +51,9 @@ public class EventTeamData : MonoBehaviour {
             }
         }
 
+
         if (eventDropdown != null) eventDropdown.refresh();
         if (teamDropdown != null) teamDropdown.refresh();
-        else Debug.Log("EJLKE");
     }
 
     public EventData[] getEvents()
@@ -108,6 +108,19 @@ public class EventTeamData : MonoBehaviour {
         return null;
     }
 
+    public TeamInfo getSelectedTeam()
+    {
+        if (teamDropdown != null)
+        {
+            string teamKey = "frc" + teamDropdown.GetComponent<Dropdown>().captionText.text.Split(' ')[0];
+            if (teamAtEventData[getSelectedEvent().key].ContainsKey(teamKey))
+            {
+                return teamAtEventData[getSelectedEvent().key][teamKey];
+            }
+        }
+        return null;
+    }
+
     public TeamInfo[] getTeams(string eventKey)
     {
         if (teamAtEventData.ContainsKey(eventKey))
@@ -126,21 +139,21 @@ public class EventTeamData : MonoBehaviour {
 [System.Serializable]
 public class EventData
 {
-    public string city;
-    public string country;
-    public DistrictInfo district;
-    public string end_date;
+    //public string city;
+    //public string country;
+    //public DistrictInfo district;
+    //public string end_date;
     public string event_code;
-    public string event_type;
+    public int event_type;
     public string key;
     public string name;
-    public string start_date;
-    public string year;
+    //public string start_date;
+    public int year;
 
-    public override string ToString()
-    {
-        return "City: " + city + " Country: " + country + " District Abbr:" + district.abbreviation + " District Name: " + district.display_name + " District Key: " + district.key + " District Year: " + district.year + " End Date: " + end_date + " Event Code: " + event_code + " Event Type: " + event_type + " Key: " + key + " Name: " + name + " Start Date: " + start_date + " Year: " + year;
-    }
+    //public override string ToString()
+    //{
+    //    return "City: " + city + " Country: " + country + " District Abbr:" + district.abbreviation + " District Name: " + district.display_name + " District Key: " + district.key + " District Year: " + district.year + " End Date: " + end_date + " Event Code: " + event_code + " Event Type: " + event_type + " Key: " + key + " Name: " + name + " Start Date: " + start_date + " Year: " + year;
+    //}
 }
 
 [System.Serializable]
@@ -153,18 +166,18 @@ public class EventTeamList
 [System.Serializable]
 public class TeamInfo
 {
-    public string city;
-    public string country;
+    //public string city;
+    //public string country;
     public string key;
-    public string name;
+    //public string name;
     public string nickname;
-    public string state_prov;
+    //public string state_prov;
     public int team_number;
 
-    public override string ToString()
-    {
-        return "City: " + city + " Country: " + country + " Key: " + key + " Name: " + name + " Nickname: " + nickname + " State/Prov: " + state_prov + " Team Number: " + team_number;
-    }
+    //public override string ToString()
+    //{
+    //    return "City: " + city + " Country: " + country + " Key: " + key + " Name: " + name + " Nickname: " + nickname + " State/Prov: " + state_prov + " Team Number: " + team_number;
+    //}
 }
 
 [System.Serializable]
@@ -174,4 +187,21 @@ public class DistrictInfo
     public string display_name;
     public string key;
     public int year;
+}
+
+[System.Serializable]
+public class MatchSync
+{
+    public string EventKey;
+    public int TeamNumber;
+    public string[] Matches;
+}
+
+[System.Serializable]
+public class AllianceInfo
+{
+    //public string[] dq_team_keys;
+    //public int score;
+    //public string[] surrogate_team_keys;
+    //public string[] team_keys;
 }

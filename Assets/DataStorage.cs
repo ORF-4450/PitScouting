@@ -9,8 +9,12 @@ public class DataStorage : MonoBehaviour {
 	public Dictionary<string,string> data = new Dictionary<string, string>();
 	public Dictionary<string,DataInput> inputs = new Dictionary<string, DataInput> ();
 	public string serverBaseURL = "";
-    public string[] Version = { "2017", "1", "0" };
+    public string[] Version = { "2018", "1", "0" };
+
+    private UnityWebRequest currentDownloadRequest;
+    private UnityWebRequest currentUploadRequest;
     public ResultText uploadResultText;
+    public ResultText downloadResultText;
 	// Use this for initialization
 	void Start () {
 		//data = new Dictionary<string, string>();
@@ -20,7 +24,24 @@ public class DataStorage : MonoBehaviour {
         data.Add("ScouterName", "");
 	}
 
-	public bool addData(string key, string value, bool overwrite) {
+    void LateUpdate()
+    {
+        if (currentDownloadRequest != null)
+        {
+            if (currentDownloadRequest.downloadProgress != 0)
+                downloadResultText.setText("Download JSON progress: " + currentDownloadRequest.downloadProgress.ToString("P2"));
+            else
+                downloadResultText.setText("Downloading JSON. This may take a while.");
+        }
+        if (currentUploadRequest != null)
+        {
+            //float progress = (currentUploadRequest.uploadProgress + currentUploadRequest.progress) / 2;
+            uploadResultText.setText("Upload data progress: " + currentUploadRequest.uploadProgress.ToString("P2"));
+
+        }
+    }
+
+    public bool addData(string key, string value, bool overwrite) {
 		try {
 			data.Add (key, value);
 			return true;
@@ -96,24 +117,23 @@ public class DataStorage : MonoBehaviour {
         return key == "ScouterName" || key == "Version" || key == "EventKey";
     }
 
-	public void sync() {
-        StartCoroutine(downloadJSON());
-		StartCoroutine (uploadData());
-	}
+    public void sync() {
+        StartCoroutine(downloadJson());
+        StartCoroutine(uploadData());
+    }
 
-    /**
-     * Downloads data from the scouting server, for example version info and event and team lists.
-     **/
-    public IEnumerator downloadJSON()
-    {
+    public IEnumerator downloadJson() {
+
         Debug.Log("Starting download of JSON");
-        UnityWebRequest wwwRequest = UnityWebRequest.Get(serverBaseURL + "/api/v1/syncDownload.php");
-        yield return wwwRequest.SendWebRequest();
+        UnityWebRequest wwwDownloadRequest = UnityWebRequest.Get(serverBaseURL + "/api/v1/syncDownload.php");
+        currentDownloadRequest = wwwDownloadRequest;
+        yield return wwwDownloadRequest.SendWebRequest();
+        currentDownloadRequest = null;
 
         Debug.Log("Download Completed.");
-        if (!wwwRequest.isHttpError)
+        if (!wwwDownloadRequest.isHttpError)
         {
-            SyncData data = JsonUtility.FromJson<SyncData>(wwwRequest.downloadHandler.text);
+            SyncData data = JsonUtility.FromJson<SyncData>(wwwDownloadRequest.downloadHandler.text);
             GetComponent<EventTeamData>().clearData();
             GetComponent<EventTeamData>().loadData(data);
 
@@ -121,7 +141,7 @@ public class DataStorage : MonoBehaviour {
                 File.Delete(Application.persistentDataPath + Path.DirectorySeparatorChar + "data.json");
 
             StreamWriter sw = File.CreateText(Application.persistentDataPath + Path.DirectorySeparatorChar + "data.json");
-            sw.Write(wwwRequest.downloadHandler.text);
+            sw.Write(wwwDownloadRequest.downloadHandler.text);
             sw.Close();
 
             if (data.CurrentVersion[2] != Version[2])
@@ -140,66 +160,63 @@ public class DataStorage : MonoBehaviour {
             }
         } else
         {
-            Debug.LogError(wwwRequest.error);
+            downloadResultText.setText("Error encountered downloading from server.");
+            Debug.LogError("Code: " + wwwDownloadRequest.responseCode + " Error: " + wwwDownloadRequest.error);
         }
-
+        wwwDownloadRequest.Dispose();
+        currentDownloadRequest = null;
+        downloadResultText.setText("Download complete");
     }
-
-        /**
-         * Uploads the data to the remote server set in the dataPOSTurl variable
-         * Returns true if the upload is successful, false if not.
-         **/
-        public IEnumerator uploadData() {
+    public IEnumerator uploadData() {
 		DirectoryInfo dinfo = new DirectoryInfo(Application.persistentDataPath);
         
 		foreach (FileInfo file in dinfo.GetFiles()) {
 			if (file.Name.StartsWith (".") || !file.Extension.Equals(".txt"))
 				continue;
 
-            WWWForm form = new WWWForm();
-            form.AddField("App", "pit");
+            Dictionary<string, string> formData = new Dictionary<string, string>();
+            formData["App"] = "pit";
             // Open the stream and read it back.
             using (StreamReader sr = file.OpenText ()) {
 				string s = "";
 				while ((s = sr.ReadLine ()) != null) {
 					string[] data = s.Split (';');
-                    string[] tmpData = data[1].Split(',');
-                    if (tmpData.Length > 1)
-                    {
-                        string newData = tmpData[0];
-                        for (int i =1; i < tmpData.Length;i++)
-                            newData = newData + "." + tmpData[i];
-                        data[1] = newData;
-                    }
+
 					Debug.Log (file.Name + ":" + data [0] + " " + data [1]);
                     uploadResultText.setText(file.Name + ":" + data[0] + " " + data[1]);
-                    form.AddField(data[0], data[1]);
-				}
+                    if (data[1] == "") data[1] = " ";
+                    formData[data[0]] = data[1];
+                }
 			}
-
-
-            WWW wwwRequest = new WWW(serverBaseURL+"/api/v1/submit.php", form);
-            yield return wwwRequest;
-
-            if (wwwRequest.error != null) {
-                Debug.Log("Error encountered uploading file " + file.Name+". Error: " + wwwRequest.error + " Additional Data: " + wwwRequest.text);
-                uploadResultText.setText("Error encountered uploading file " + file.Name);
+            Debug.Log("Creating request");
+            UnityWebRequest uploadRequest = UnityWebRequest.Post(serverBaseURL + "/api/v1/submit.php", formData);
+            Debug.Log("Form upload begun for file " + file.Name);
+            currentUploadRequest = uploadRequest;
+            Debug.Log(uploadRequest.url);
+            uploadRequest.chunkedTransfer = false;
+            yield return uploadRequest.SendWebRequest();
+            if (!uploadRequest.isHttpError)
+            {
+                file.Delete();
+            } else
+            {
+                uploadResultText.setText("An error has occured.");
+                Debug.LogError("Error uploading file " + file.Name + " Error Code: " + uploadRequest.responseCode);
                 continue;
             }
-            else {
-                Debug.Log("Form upload complete for file " + file.Name + " Response: " + wwwRequest.text);
-                uploadResultText.setText("Form upload complete for file " + file.Name);
-                string path = Application.persistentDataPath + Path.DirectorySeparatorChar + "uploaded" + Path.DirectorySeparatorChar + file.Name.Split('-')[0].Split('.')[0];
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-                if (!File.Exists(path + Path.DirectorySeparatorChar + file.Name))
-                    file.MoveTo(path + Path.DirectorySeparatorChar + file.Name);
-                yield return new WaitForSeconds(0.25f);
-                continue;
-            }
-		}
+
+            
+            Debug.Log("Request complete.");
+
+            
+
+            yield return new WaitForSeconds(0.25f);
+        }
+        currentUploadRequest = null;
+        uploadResultText.setText("Uploading Complete");
 	}
 }
+
 
 [System.Serializable]
 public class SyncData
@@ -207,4 +224,5 @@ public class SyncData
     public string[] CurrentVersion;
     public EventData[] Events;
     public EventTeamList[] TeamsByEvent;
+    public MatchSync[] EventMatches;
 }

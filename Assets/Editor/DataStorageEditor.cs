@@ -18,8 +18,12 @@ public class DataStorageEditor : Editor {
         }
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal("box");
-        GUILayout.Label("Result Text:");
+        GUILayout.Label("Upload Result Text:");
         Script.uploadResultText = (ResultText)EditorGUILayout.ObjectField(Script.uploadResultText, typeof(ResultText), true);
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal("box");
+        GUILayout.Label("Download Result Text:");
+        Script.downloadResultText = (ResultText)EditorGUILayout.ObjectField(Script.downloadResultText, typeof(ResultText), true);
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal ("box");
 		GUILayout.Label ("Base Server URL:");
@@ -38,14 +42,20 @@ public class DataStorageEditor : Editor {
 		if (GUILayout.Button ("Click to save to file and clear!")) {
 			StatusMessage = "Data saved to: " + Script.saveToFile (true);
 		}
-        if (GUILayout.Button("Click to download JSON."))
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Click to Download."))
         {
-            Script.StartCoroutine(Script.downloadJSON());
+            Script.StartCoroutine(Script.downloadJson());
         }
-		if (GUILayout.Button ("Click to upload data!")) {
-			Script.uploadData();
-			StatusMessage = "Data Uploading...";
-		}
-		GUILayout.Label (StatusMessage);
+        if (GUILayout.Button("Click to Sync."))
+        {
+            Script.sync();
+        }
+        if (GUILayout.Button("Click to Upload."))
+        {
+            Script.StartCoroutine(Script.uploadData());
+        }
+        GUILayout.EndHorizontal();
+        GUILayout.Label (StatusMessage);
 	}
 }
