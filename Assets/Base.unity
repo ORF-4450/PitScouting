@@ -9155,13 +9155,17 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Does not climb.
+    - m_Text: No Climb
       m_Image: {fileID: 0}
-    - m_Text: Assists 1 robot.
+    - m_Text: Climbed Alone
       m_Image: {fileID: 0}
-    - m_Text: Assists 2 robots.
+    - m_Text: Climbed + Assisted 1 Robot
       m_Image: {fileID: 0}
-    - m_Text: Climbs Alone.
+    - m_Text: Climbed + Assisted 2 Robots
+      m_Image: {fileID: 0}
+    - m_Text: No Climb + Assisted 1 Robot
+      m_Image: {fileID: 0}
+    - m_Text: No Climb + Assisted 2 Robots
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
