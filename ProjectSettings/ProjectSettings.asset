@@ -126,7 +126,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0
+  bundleVersion: 2018.1.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -161,11 +161,11 @@ PlayerSettings:
     Android: io.github.mosadie.PitScout
     Standalone: unity.MoSadie.Pit Scouting
     Tizen: io.github.mosadie.PitScout
-    iOS: io.github.mosadie.PitScout
+    iOS: io.github.mosadie.PitScouter
     tvOS: io.github.mosadie.PitScout
   buildNumber:
     iOS: 0
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -241,7 +241,7 @@ PlayerSettings:
   metalEditorSupport: 1
   metalAPIValidation: 1
   iOSRenderExtraFrameOnPause: 1
-  appleDeveloperTeamID: 
+  appleDeveloperTeamID: 5ZA9DQCQ5Z
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
   appleEnableAutomaticSigning: 0
@@ -249,8 +249,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: C:/Users/sean/Documents/GitHub/StandScouting/user.keystore
+  AndroidKeyaliasName: orf
   AndroidTVCompatibility: 1
   AndroidIsGame: 0
   AndroidEnableTango: 0
