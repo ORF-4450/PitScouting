@@ -7,7 +7,7 @@ To Do:
 	This will require them to be seperated from their parent objects, which will be an issue because they won't disappear with the parent object.
 	We could set it up so they do with the current system, but it would be clunky and spaghetti-like.
 	I propose we create a new script that will copy the 'visible' tag from an object, and 'paste' it into the object the script is attached to.
-	
+
 
 10/26/22-Add 'help' button to LeftSidebar in the main menu. Link it to the google doc (Documentation for scouters)
 
@@ -23,23 +23,9 @@ a text file from the server.
 
 DOCUMENTATION:
 
-CopyPasteObject and Script - 10/26/22
-The CopyPasteObject is a workaround for a problem encountered on 10/4/22. Some objects were required to be children
-of another object, but needed to be visible when a different object was visible. The CopyPasteObject overrides visibility
-based on the parent, and instead copies visibility from the 'Copy From' field.
-
-	'Copy From' - Object to copy visibility from
-	'Paste To' - Object to paste visibility to
-	'Exclude' - Hide 'Paste To' when 'Exclude' is visible
-
 LeftSidebar - 10/26/22
 The left sidebar is the light blue strip on the left side of the screen. It contains the version number,
 navigation buttons, and sync button.
-
-RightSidebar - 10/26/22
-The right sidebar is 'invisible'. It is a part of a workaround for a problem encountered on 10/4/22. It
-is used to stick objects to the right side of the screen (i.e. 'Back Button', 'Load', 'RobotNotes', etc)
-All objects in this object use a CopyPaste script (located in 'CopyPasteObject') to inherit visibility.
 
 Sync Button - 10/26/22
 The sync button triggers DataStorage to send data (Not pictures, yet) to a google form for data collection. It
