@@ -1,1 +1,75 @@
 Documentation can be found at https://docs.google.com/document/d/1PHqMlBLlkmtXoTknLWjmSPsZG8q4Xokd9Fvx3k0D-YY/edit?usp=sharing
+
+
+To Do:
+
+10/4/22-Move right side elements such as text boxes to fit to the right side of screen.
+	This will require them to be seperated from their parent objects, which will be an issue because they won't disappear with the parent object.
+	We could set it up so they do with the current system, but it would be clunky and spaghetti-like.
+	I propose we create a new script that will copy the 'visible' tag from an object, and 'paste' it into the object the script is attached to.
+	
+
+10/26/22-Add 'help' button to LeftSidebar in the main menu. Link it to the google doc (Documentation for scouters)
+
+10/26/22-Add "far" and "near" to position select display to avoid confusion. Do not include these in animation
+
+10/26/22-It may be feasible to procedurally generate dropdown, textbox, counter, and checkbox positions by reading
+a text file from the server.
+	Once implemented, most of a programmer's job would be to change this text file, and they wouldn't need to touch
+	the UI. It would be seperated into different sections, one for each scouting menu; Pregame, Autonomous,
+	Teleop, Endgame, and Strategy.
+
+10/26/22-Add menu for pit scouting (Scouting outside of simply watching the game; talking to teams and taking pictures)
+
+DOCUMENTATION:
+
+CopyPasteObject and Script - 10/26/22
+The CopyPasteObject is a workaround for a problem encountered on 10/4/22. Some objects were required to be children
+of another object, but needed to be visible when a different object was visible. The CopyPasteObject overrides visibility
+based on the parent, and instead copies visibility from the 'Copy From' field.
+
+	'Copy From' - Object to copy visibility from
+	'Paste To' - Object to paste visibility to
+	'Exclude' - Hide 'Paste To' when 'Exclude' is visible
+
+LeftSidebar - 10/26/22
+The left sidebar is the light blue strip on the left side of the screen. It contains the version number,
+navigation buttons, and sync button.
+
+RightSidebar - 10/26/22
+The right sidebar is 'invisible'. It is a part of a workaround for a problem encountered on 10/4/22. It
+is used to stick objects to the right side of the screen (i.e. 'Back Button', 'Load', 'RobotNotes', etc)
+All objects in this object use a CopyPaste script (located in 'CopyPasteObject') to inherit visibility.
+
+Sync Button - 10/26/22
+The sync button triggers DataStorage to send data (Not pictures, yet) to a google form for data collection. It
+also recives data on current and future competitions; Competition names, team numbers, and team names.
+
+Keys - 10/26/22
+Each piece of data requires a key. A key is the name that classifies the piece of data. For instance,
+a string containing a scouter's name is assiged 'ScouterName'.
+
+ScoutingPosition - 10/26/22
+Old dropdown for setting scouting position, might break stuff if deleted. New version is called
+'Pre_StartingPos' (Pre-Game Starting Position).
+
+Pre_StartingPos - 10/26/22
+This object is composed of seven buttons ('Photos' is not a child of the object). Half of it is the red team, the other half is blue. Buttons change a
+variable in the Pre_StartingPos object when clicked. Buttons read that variable and will light up when it is
+equal to the button's name. The six upper buttons will turn when 'Swap' is pressed, in case the team is on the
+other side of the field.
+
+Inital Menu - 10/26/22
+Parent object of most things that appear in the main menu.
+
+PeriodMenu - 10/26/22
+Parent of navigation buttons in the scouter menus.
+
+Swap - 10/26/22
+Triggers animation 'ButtonPressed' on itself, and triggers function 'Flip' of 'FlipImageScript',
+located within 'Pre_StartingPos'. This script then triggers either animation 'SelectionButtonSpinCW'
+or its inverse, 'SelectionButtonSpinCCW'.
+
+Version - 10/26/22
+Text, derrived using 'DataOutput' drawing data with key 'Version' from 'DataStore'.
+    
