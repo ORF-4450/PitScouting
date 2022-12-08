@@ -1,6 +1,6 @@
 Documentation can be found at https://docs.google.com/document/d/1PHqMlBLlkmtXoTknLWjmSPsZG8q4Xokd9Fvx3k0D-YY/edit?usp=sharing
 
-For anything not there, consult the Wiki on Github
+For anything not there, consult the Wiki on Github https://github.com/ORF-4450/PitScouting/wiki
 
 To Do:
 
