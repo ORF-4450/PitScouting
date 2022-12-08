@@ -10,6 +10,5 @@ public class OpenHyperlink : MonoBehaviour
     public void Openchannel()
     {
         Application.OpenURL(Hyperlink);
-        Debug.Log("TEST");
     }
 }
