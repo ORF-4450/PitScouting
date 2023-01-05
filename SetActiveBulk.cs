@@ -19,9 +19,9 @@ public class SetActiveBulk : MonoBehaviour
 
     public void SetState()
     {
-        /*foreach (GameObject gameObjectInList in Objects)
+        foreach (GameObject gameObjectInList in Objects)
         {
             gameObjectInList.SetActive(Bools[Objects.IndexOf(gameObjectInList)]);
-        }*/
+        }
     }
 }
