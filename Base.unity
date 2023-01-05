@@ -514,6 +514,7 @@ MonoBehaviour:
   buttonName: RB
   storeName: Right
   fullButton: 0
+  LaunchButton: {fileID: 0}
 --- !u!114 &9767544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2983,6 +2984,7 @@ MonoBehaviour:
   buttonName: CB
   storeName: Center
   fullButton: 0
+  LaunchButton: {fileID: 0}
 --- !u!114 &244050963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6742,6 +6744,7 @@ MonoBehaviour:
   buttonName: Transversal
   storeName: Transversal Rung
   fullButton: 1
+  LaunchButton: {fileID: 0}
 --- !u!222 &514257977
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8080,6 +8083,7 @@ MonoBehaviour:
   buttonName: LR
   storeName: Left
   fullButton: 0
+  LaunchButton: {fileID: 0}
 --- !u!114 &663906883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12118,6 +12122,7 @@ MonoBehaviour:
   buttonName: LB
   storeName: Left
   fullButton: 0
+  LaunchButton: {fileID: 0}
 --- !u!114 &1062883137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12344,6 +12349,7 @@ MonoBehaviour:
   buttonName: RR
   storeName: Right
   fullButton: 0
+  LaunchButton: {fileID: 0}
 --- !u!114 &1080030701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15525,6 +15531,7 @@ MonoBehaviour:
   buttonName: Mid
   storeName: Middle Rung
   fullButton: 1
+  LaunchButton: {fileID: 0}
 --- !u!222 &1489025320
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19375,6 +19382,7 @@ MonoBehaviour:
   buttonName: Upper
   storeName: Upper Rung
   fullButton: 1
+  LaunchButton: {fileID: 0}
 --- !u!222 &1812284021
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19987,6 +19995,7 @@ MonoBehaviour:
   buttonName: Low
   storeName: Lower Rung
   fullButton: 1
+  LaunchButton: {fileID: 0}
 --- !u!222 &1835973592
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20592,6 +20601,7 @@ MonoBehaviour:
   buttonName: Cam
   storeName: Camera
   fullButton: 0
+  LaunchButton: {fileID: 2059570503}
 --- !u!222 &1904660496
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21028,6 +21038,7 @@ MonoBehaviour:
   buttonName: CR
   storeName: Center
   fullButton: 0
+  LaunchButton: {fileID: 0}
 --- !u!114 &1948198911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21915,6 +21926,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2059570502}
+  - component: {fileID: 2059570503}
   m_Layer: 0
   m_Name: Launch Buttons
   m_TagString: Untagged
@@ -21938,6 +21950,24 @@ Transform:
   m_Father: {fileID: 1566258819}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2059570503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059570501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3cd1c8382aa50d46af1553f8b64a94d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+  - {fileID: 307087929}
+  - {fileID: 511911791}
+  BoolsStateZero: 0100
+  BoolsStateOne: 0001
+  BoolsStateTwo: 
 --- !u!1 &2070850814
 GameObject:
   m_ObjectHideFlags: 0
@@ -22330,6 +22360,7 @@ MonoBehaviour:
   buttonName: NoClimb
   storeName: No Climb
   fullButton: 1
+  LaunchButton: {fileID: 0}
 --- !u!222 &2071579742
 CanvasRenderer:
   m_ObjectHideFlags: 0
