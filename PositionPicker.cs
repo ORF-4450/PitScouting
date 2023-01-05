@@ -11,6 +11,9 @@ public class PositionPicker : MonoBehaviour
     public string buttonName = null;
     public string storeName = null;
     public bool fullButton = false;
+
+    [SerializeField] public SidebarStates LaunchButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +28,10 @@ public class PositionPicker : MonoBehaviour
     {
         if (PS.buttonName == buttonName) {
             GetComponent<Image>().sprite = ON;
+            if (buttonName == "Cam") LaunchButton.SwitchState(1);
         } else {
             GetComponent<Image>().sprite = OFF;
+            if (buttonName == "Cam") LaunchButton.SwitchState(0);
         }
     }
 
