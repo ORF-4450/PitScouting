@@ -5,7 +5,10 @@ using UnityEngine;
 public class SidebarStates : MonoBehaviour
 {
     [SerializeField] List<GameObject> Objects;
-    [SerializeField] List<bool> Bools;
+    [SerializeField] List<bool> BoolsStateZero;
+    [SerializeField] List<bool> BoolsStateOne;
+    [SerializeField] List<bool> BoolsStateTwo;
+    private List<bool> BoolStateList;
 
     // Start is called before the first frame update
     void Start()
@@ -19,16 +22,43 @@ public class SidebarStates : MonoBehaviour
         
     }
 
-    void SwitchState()
+    public void SwitchState(int State)
     {
-        foreach (bool Boolean in Bools) //Set each bool to its opposite
+        switch (State)
         {
-            Bools[Bools.IndexOf(Boolean)] = !Boolean;
+        case 0:
+            BoolStateList = BoolsStateZero;
+            break;
+        case 1:
+            BoolStateList = BoolsStateOne;
+            break;
+        case 2:
+            BoolStateList = BoolsStateTwo;
+            break;
+        default:
+            Debug.LogError("SwitchState in SidebarStates has received an invalid value");
+            break;
         }
 
         foreach (GameObject gameObjectInList in Objects) //Set game objects to their respective activation booleans
         {
-            gameObjectInList.SetActive(Bools[Objects.IndexOf(gameObjectInList)]);
+            gameObjectInList.SetActive(BoolStateList[Objects.IndexOf(gameObjectInList)]);
         }
     }
+
+    //Required to call functions within Unity
+    /*public void SetStateOne(int hello)
+    {
+        SetState(BoolsStateOne);
+    }
+
+    public void SetStateTwo()
+    {
+        SetState(BoolsStateTwo);
+    }
+
+    public void SetStateThree()
+    {
+        SetState(BoolsStateThree);
+    }*/
 }
