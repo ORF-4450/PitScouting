@@ -909,7 +909,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 353756085}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5514,7 +5514,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1735437746}
   - {fileID: 615267156}
   - {fileID: 528142578}
   - {fileID: 733346393}
@@ -7611,7 +7610,7 @@ RectTransform:
   - {fileID: 24160767}
   - {fileID: 698699185}
   m_Father: {fileID: 353756085}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8170,7 +8169,7 @@ RectTransform:
   - {fileID: 2070850815}
   - {fileID: 1229272816}
   m_Father: {fileID: 353756085}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9288,7 +9287,7 @@ RectTransform:
   - {fileID: 1602794976}
   - {fileID: 299627625}
   m_Father: {fileID: 353756085}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11901,7 +11900,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 353756085}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14966,6 +14965,7 @@ RectTransform:
   - {fileID: 1863335087}
   - {fileID: 1164209504}
   - {fileID: 109999121}
+  - {fileID: 1735437746}
   m_Father: {fileID: 2104130710}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18239,13 +18239,13 @@ MonoBehaviour:
   Objects:
   - {fileID: 1566258818}
   - {fileID: 353756084}
-  - {fileID: 1735437745}
   - {fileID: 615267155}
   - {fileID: 2104130709}
   - {fileID: 2104130709}
+  - {fileID: 614989239}
   BoolsStateZero: 010000000000
-  BoolsStateOne: 000101010000
-  BoolsStateTwo: 000000000101
+  BoolsStateOne: 000101000000
+  BoolsStateTwo: 000000010101
 --- !u!1 &1575973220
 GameObject:
   m_ObjectHideFlags: 0
@@ -20547,12 +20547,12 @@ RectTransform:
   m_Children:
   - {fileID: 2071424738}
   - {fileID: 579310976}
-  m_Father: {fileID: 353756085}
-  m_RootOrder: 0
+  m_Father: {fileID: 1213054678}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 600, y: -180}
+  m_AnchoredPosition: {x: 600, y: -120}
   m_SizeDelta: {x: 451.125, y: 230.625}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1735437747
