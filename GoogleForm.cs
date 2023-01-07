@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoogleForm : MonoBehaviour
 {
-    private string formURL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSeDO42dRhlJ6_7uiaSYDMpu-nietEZ5xSm9tOmCyv88KaTgOw/formResponse";
+    [SerializeField] private string formURL;
     public DataStorage DS;
     // Start is called before the first frame update
     void Start()
