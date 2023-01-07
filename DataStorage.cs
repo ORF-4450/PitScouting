@@ -365,7 +365,6 @@ public class ValidatorData //Used http://json2csharp.com/ to generate this.
     public string Teleop_ScalePlace { get; set; }
     public string Teleop_SwitchPlace { get; set; }
     public string Teleop_ExchangeVisit { get; set; }
-    public string Teleop_Notes { get; set; }
     public string RobotNotes { get; set; }
     public string Teleop_Climb { get; set; }
     public string Strategy_PowerUp { get; set; }

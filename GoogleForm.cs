@@ -22,7 +22,7 @@ public class GoogleForm : MonoBehaviour
     {
         Debug.Log("Ran!");
         WWWForm form = new WWWForm();
-        string[] keys = {"App","Version","ScouterName","EventKey","ScouterTeamNumber","TeamNumber","RobotNotes","Auto_LeftTarmac","Auto_BallThrown","Auto_Notes","Auto_LowerShots","Auto_UpperShots","Teleop_UpperShots","Teleop_LowerShots","Teleop_TerminalVisits","Teleop_Notes","Strategy_Launchpad","Strategy_Shooting","Teleop_RequiresTerminal","Strategy_General","Teleop_Climb"};
+        string[] keys = {"App","Version","ScouterName","EventKey","ScouterTeamNumber","TeamNumber","RobotNotes","Auto_LeftTarmac","Auto_BallThrown","Auto_Notes","Auto_LowerShots","Auto_UpperShots","Teleop_UpperShots","Teleop_LowerShots","Teleop_TerminalVisits","Strategy_Launchpad","Strategy_Shooting","Teleop_RequiresTerminal","Strategy_General","Teleop_Climb"};
         foreach (string key in keys)
         {
             form.AddField(gFormID,key + ";" + data[key]);
