@@ -5101,7 +5101,7 @@ GameObject:
   - component: {fileID: 311250462}
   - component: {fileID: 311250461}
   m_Layer: 0
-  m_Name: test
+  m_Name: GoogleForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5119,6 +5119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3643776168443447a56c3c52d70fe24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  formURL: https://docs.google.com/forms/u/1/d/e/1FAIpQLSeDO42dRhlJ6_7uiaSYDMpu-nietEZ5xSm9tOmCyv88KaTgOw/formResponse
   DS: {fileID: 768052562}
 --- !u!4 &311250462
 Transform:
