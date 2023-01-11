@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DataToggle : DataInput {
+public class DataToggle : DataInput { //More like "DataBool" or "DataCheckbox"
 
     public DataStorage ds;
     private Toggle toggle;

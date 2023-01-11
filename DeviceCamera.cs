@@ -149,6 +149,7 @@ public class DeviceCamera : MonoBehaviour
     }
 
     /* THIS CODE DOES NOT WORK YET
+    //IT TRIES TO UPLOAD A PNG TO A GOOGLE FORM THAT SENDS IT TO A GOOGLE SHEET WHERE IT'S VIEWABLE JUST LIKE THE OTHER DATA
     IEnumerator UploadPNG() {
         DirectoryInfo dinfo = new DirectoryInfo(Application.persistentDataPath);
         foreach (FileInfo file in dinfo.GetFiles())

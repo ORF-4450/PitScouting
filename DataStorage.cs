@@ -9,8 +9,8 @@ public class DataStorage : MonoBehaviour
 {
     public Dictionary<string, string> data = new Dictionary<string, string>();
     public Dictionary<string, DataInput> inputs = new Dictionary<string, DataInput>();
-    public string serverBaseURL = "https://orf-4450scoutingapp.azurewebsites.net";
-    public string[] Version = { "2022", "0", "0" };
+    public string serverBaseURL = "https://orf-4450scoutingapp.azurewebsites.net"; //Website to pull competition data off of.
+    public string[] Version = { "2022", "0", "0" }; //Version number, doesn't mean much.
     public GoogleForm GoogleForm;
 
     private UnityWebRequest currentDownloadRequest;
@@ -78,7 +78,7 @@ public class DataStorage : MonoBehaviour
         }
     }
 
-    public bool addData(string key, string value, bool overwrite, DataInput DI) //This second addData allows 'addData' to use 3 OR 4 inputs, called an overload function.
+    public bool addData(string key, string value, bool overwrite, DataInput DI) //This second addData allows 'addData' to use 4 inputs (previous used 3, so you can call either version). This is called an overload function.
     {
         try
         {
@@ -348,7 +348,7 @@ public class SyncData
     public MatchSync[] EventMatches;
 }
 
-[System.Serializable]
+[System.Serializable] //I don't belive ValidatorData is used anymore
 public class ValidatorData //Used http://json2csharp.com/ to generate this.
 {
     public string App { get; set; }
