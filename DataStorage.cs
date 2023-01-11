@@ -5,6 +5,7 @@ using System.IO;
 using System;
 using UnityEngine.Networking;
 
+
 public class DataStorage : MonoBehaviour
 {
     public Dictionary<string, string> data = new Dictionary<string, string>();
@@ -13,10 +14,16 @@ public class DataStorage : MonoBehaviour
     public string[] Version = { "2022", "0", "0" }; //Version number, doesn't mean much.
     public GoogleForm GoogleForm;
 
+    [SerializeField] public string dataStorageKey;
+
     private UnityWebRequest currentDownloadRequest;
     private UnityWebRequest currentUploadRequest;
     public ResultText uploadResultText;
     public ResultText downloadResultText;
+//Having issues displaying these? Check out DataStorageEditor.cs
+//Not sure why that script exists though
+
+
     /*
      *  DataStorage is essentially a library for the rest of the code, in addition to storing data.
      *  Scouting data is stored in .txt files on the device (along with .png's).
@@ -121,18 +128,18 @@ public class DataStorage : MonoBehaviour
 	**/
     public string saveToFile(bool clear)
     {
-        string filePath = Application.persistentDataPath + Path.DirectorySeparatorChar + data["TeamNumber"] + ".txt"; //Default path, may need adjusting if duplicate fils
+        string filePath = Application.persistentDataPath + Path.DirectorySeparatorChar + dataStorageKey + data["TeamNumber"] + ".txt"; //Default path, may need adjusting if duplicate fils
         if (File.Exists(filePath))
         {
             int maxCount = 1000;
             for (int i = 1; i < maxCount + 1; i++)
             {
-                string tmpFilePath = Application.persistentDataPath + Path.DirectorySeparatorChar + data["TeamNumber"] + "-" + (maxCount - i + 1) + ".txt"; //Try different possibilities until 1000, then give up
+                string tmpFilePath = Application.persistentDataPath + Path.DirectorySeparatorChar + dataStorageKey + data["TeamNumber"] + "-" + (maxCount - i + 1) + ".txt"; //Try different possibilities until 1000, then give up
                 if (!File.Exists(tmpFilePath))
                 {
                     filePath = tmpFilePath;
                 }
-                if (i == maxCount && filePath == Application.persistentDataPath + Path.DirectorySeparatorChar + data["TeamNumber"] + ".txt")
+                if (i == maxCount && filePath == Application.persistentDataPath + Path.DirectorySeparatorChar + dataStorageKey + data["TeamNumber"] + ".txt")
                 {
                     Debug.LogError("Too many files! Couldn't save data, not clearing");
                     return "error";
@@ -262,7 +269,8 @@ public class DataStorage : MonoBehaviour
             foreach (FileInfo file in dinfo.GetFiles())
             {
                 if (file.Name.StartsWith(".") || !file.Extension.Equals(".txt"))
-                    continue;
+                    if (file.Name.Contains(dataStorageKey))
+                        continue;
 
                 Dictionary<string, string> formData = new Dictionary<string, string>();
                 formData["App"] = "pit";

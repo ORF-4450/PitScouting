@@ -12,6 +12,7 @@ public class EventTeamData : MonoBehaviour {
 
     public EventDropdown eventDropdown;
     public TeamDropdown teamDropdown;
+    public TeamDropdown teamDropdownTwo;
  
     public void Start()
     {
@@ -27,6 +28,7 @@ public class EventTeamData : MonoBehaviour {
         teamAtEventData.Clear();
         if (eventDropdown != null) { eventDropdown.clear(); }
         if (teamDropdown != null) { teamDropdown.clear(); }
+        if (teamDropdownTwo != null) { teamDropdownTwo.clear(); }
     }
 
     public void loadData(SyncData dataToLoad)

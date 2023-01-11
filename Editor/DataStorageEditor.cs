@@ -17,22 +17,32 @@ public class DataStorageEditor : Editor {
             Script.Version[i] = GUILayout.TextField(Script.Version[i]);
         }
         GUILayout.EndHorizontal();
+
         GUILayout.BeginHorizontal("box");
         GUILayout.Label("Upload Result Text:");
         Script.uploadResultText = (ResultText)EditorGUILayout.ObjectField(Script.uploadResultText, typeof(ResultText), true);
         GUILayout.EndHorizontal();
+
         GUILayout.BeginHorizontal("box");
         GUILayout.Label("Download Result Text:");
         Script.downloadResultText = (ResultText)EditorGUILayout.ObjectField(Script.downloadResultText, typeof(ResultText), true);
         GUILayout.EndHorizontal();
+
         GUILayout.BeginHorizontal ("box");
 		GUILayout.Label ("Base Server URL:");
 		Script.serverBaseURL = GUILayout.TextField (Script.serverBaseURL);
 		GUILayout.EndHorizontal ();
+
         GUILayout.BeginHorizontal("box");
         GUILayout.Label("Google Form Script");
         Script.GoogleForm = (GoogleForm)EditorGUILayout.ObjectField(Script.GoogleForm, typeof(GoogleForm), true);
         GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal("box");
+        GUILayout.Label("Datastorage Key");
+        Script.dataStorageKey = GUILayout.TextField(Script.dataStorageKey);
+        GUILayout.EndHorizontal();
+
 		if (Script.data.Count <= 0) {
 			GUILayout.Label ("Currenty no data to display!");
 			return;
