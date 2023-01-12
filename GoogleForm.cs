@@ -6,6 +6,7 @@ public class GoogleForm : MonoBehaviour
 {
     [SerializeField] private string formURL;
     public DataStorage DS;
+    [SerializeField] string[] keys;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class GoogleForm : MonoBehaviour
         WWWForm form = new WWWForm();
 
         //Sends in this order
-        string[] keys = {"App","Version","ScouterName","EventKey","ScouterTeamNumber","TeamNumber","RobotNotes","Auto_LeftTarmac","Auto_BallThrown","Auto_Notes","Auto_LowerShots","Auto_UpperShots","Teleop_UpperShots","Teleop_LowerShots","Teleop_TerminalVisits","Strategy_Launchpad","Strategy_Shooting","Teleop_RequiresTerminal","Strategy_General","Teleop_Climb"};
+        //string[] keys = {"App","Version","ScouterName","EventKey","ScouterTeamNumber","TeamNumber","RobotNotes","Auto_LeftTarmac","Auto_BallThrown","Auto_Notes","Auto_LowerShots","Auto_UpperShots","Teleop_UpperShots","Teleop_LowerShots","Teleop_TerminalVisits","Strategy_Launchpad","Strategy_Shooting","Teleop_RequiresTerminal","Strategy_General","Teleop_Climb"};
         foreach (string key in keys)
         {
             form.AddField(gFormID,key + ";" + data[key]); //Puts data into this format: KEY;VALUE, KEY;VALUE, KEY;VALUE

@@ -15,6 +15,7 @@ public class DataStorage : MonoBehaviour
     public GoogleForm GoogleForm;
 
     [SerializeField] public string dataStorageKey;
+    public string appName;
 
     private UnityWebRequest currentDownloadRequest;
     private UnityWebRequest currentUploadRequest;
@@ -268,19 +269,19 @@ public class DataStorage : MonoBehaviour
 
             foreach (FileInfo file in dinfo.GetFiles())
             {
-                if (file.Name.StartsWith(".") || !file.Extension.Equals(".txt"))
-                    if (file.Name.Contains(dataStorageKey))
-                        continue;
+                if (file.Extension.Equals(".txt") && file.Name.Contains(dataStorageKey) && !file.Name.Contains("data")){
+                    //if ()
+                        //continue;
 
                 Dictionary<string, string> formData = new Dictionary<string, string>();
-                formData["App"] = "pit";
+                formData["App"] = appName;
                 // Open the stream and read it back.
                 using (StreamReader sr = file.OpenText())
                 {
                     string s = "";
                     while ((s = sr.ReadLine()) != null)
                     {
-                        Debug.Log(Application.persistentDataPath);
+                        Debug.Log(Application.persistentDataPath + "/" + file.Name);
                         string[] data = s.Split(';');
 
                         
@@ -328,6 +329,9 @@ else
 
 
                 yield return new WaitForSeconds(0.25f);
+                } else {
+                    Debug.Log(file.Name + " Failed Upload");
+                }
             }
         }
         currentUploadRequest = null;

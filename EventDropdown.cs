@@ -8,24 +8,30 @@ public class EventDropdown : DataInput {
 
     Dropdown dropdown;
     public DataStorage DS;
+    public DataStorage DStwo;
     public EventTeamData ETD;
+    public bool testEvent;
 
 	// Use this for initialization
 	void Start () {
         dropdown = GetComponent<Dropdown>();
         refresh();
         dropdown.AddOptions(new List<Dropdown.OptionData>() { new Dropdown.OptionData("ERR - Please Sync") });
+        dropdown.AddOptions(new List<Dropdown.OptionData>() { new Dropdown.OptionData("TestCompetition") });
         dropdown.RefreshShownValue();
         DS.addData("EventKey", "ERROR", true, this);
+        DStwo.addData("EventKey", "ERROR", true, this);
     }
 
     void LateUpdate()
     {
         //private string test = GetComponent<Dropdown>().captionText.text.Split(' ')[0];
         //Debug.Log("Made it to Late Update");
+        //Debug.Log(ETD.getSelectedEvent().key);
         if (dropdown.captionText.text == "ERR - Please Sync") return;
         DS.addData("EventKey", ETD.getSelectedEvent().key, true);
-        //Debug.Log(ETD.getSelectedEvent().key);
+        DStwo.addData("EventKey", ETD.getSelectedEvent().key, true);
+        
     }
     
 

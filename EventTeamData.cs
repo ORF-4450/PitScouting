@@ -40,6 +40,8 @@ public class EventTeamData : MonoBehaviour {
             eventData.Add(Event.key, Event);
         }
 
+        //eventData.Add("testEvent", );
+
         foreach (EventTeamList etl in dataToLoad.TeamsByEvent)
         {
             if (teamAtEventData.ContainsKey(etl.EventKey)) continue;
@@ -52,6 +54,9 @@ public class EventTeamData : MonoBehaviour {
                 teamAtEventData[etl.EventKey].Add(ti.key, ti);
             }
         }
+
+        //teamAtEventData.Add("testEvent", new Dictionary<string, TeamInfo>());
+        //teamAtEventData["testEvent"].Add("testEvent", "4450");
 
 
         if (eventDropdown != null) eventDropdown.refresh();

@@ -43,6 +43,11 @@ public class DataStorageEditor : Editor {
         Script.dataStorageKey = GUILayout.TextField(Script.dataStorageKey);
         GUILayout.EndHorizontal();
 
+        GUILayout.BeginHorizontal("box");
+        GUILayout.Label("App Name");
+        Script.appName = GUILayout.TextField(Script.appName);
+        GUILayout.EndHorizontal();
+
 		if (Script.data.Count <= 0) {
 			GUILayout.Label ("Currenty no data to display!");
 			return;
