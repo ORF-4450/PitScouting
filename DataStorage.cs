@@ -22,7 +22,6 @@ public class DataStorage : MonoBehaviour
     public ResultText uploadResultText;
     public ResultText downloadResultText;
 //Having issues displaying these? Check out DataStorageEditor.cs
-//Not sure why that script exists though
 
 
     /*
@@ -68,7 +67,7 @@ public class DataStorage : MonoBehaviour
     {
         try
         {
-            data.Add(key, value);
+            data.Add(key, value); //adds (key, value) to data, a <string, string> dictionary
             return true;
         }
         catch (ArgumentNullException e)
