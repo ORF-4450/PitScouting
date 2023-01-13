@@ -239,12 +239,12 @@ public class DataStorage : MonoBehaviour
                 if (data.CurrentVersion[1] != Version[1])
                 {
                     Debug.LogWarning("Minor Version mismatch.");
-                    uploadResultText.setText("Warning: Minorly out of date. Please update if possible.");
+                    uploadResultText.setText("Warning: Minorly out of date. Please update if possible."); //This means the app version number does not match that of the server.
                 }
                 if (data.CurrentVersion[0] != Version[0])
                 {
                     Debug.LogWarning("Major/Year Version mismatch.");
-                    uploadResultText.setText("Warning: Majorly out of date. Please update ASAP.");
+                    uploadResultText.setText("Warning: Majorly out of date. Please update ASAP."); //This means the app version number does not match that of the server.
                 }
             else
             {
