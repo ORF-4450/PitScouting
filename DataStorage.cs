@@ -53,7 +53,7 @@ public class DataStorage : MonoBehaviour
     {
         if (currentDownloadRequest != null)
         {
-            downloadResultText.setText("Download JSON progress: " + currentDownloadRequest.downloadProgress.ToString("P2"));
+            uploadResultText.setText("Download JSON progress: " + currentDownloadRequest.downloadProgress.ToString("P2"));
 
         }
         if (currentUploadRequest != null)
@@ -152,7 +152,7 @@ public class DataStorage : MonoBehaviour
             string[] excluded = {"Pre_StartingPos","Teleop_Climb"};
             foreach (KeyValuePair<string, string> kvp in data)
             {
-                if (inputs.ContainsKey(kvp.Key) && clear && !isStaticKey(kvp.Key) && (kvp.Key != excluded[0]))
+                if (inputs.ContainsKey(kvp.Key) && clear && !isStaticKey(kvp.Key) && (kvp.Key != excluded[0])) //Clear Function
                     inputs[kvp.Key].clearData();
                 string bufferText = kvp.Value.Replace(';', ':');
                 sw.WriteLine(kvp.Key + ";" + kvp.Value.Replace(',', 'ǂ'));
@@ -240,22 +240,22 @@ public class DataStorage : MonoBehaviour
                 if (data.CurrentVersion[1] != Version[1])
                 {
                     Debug.LogWarning("Minor Version mismatch.");
-                    downloadResultText.setText("Warning: Minorly out of date. Please update if possible.");
+                    uploadResultText.setText("Warning: Minorly out of date. Please update if possible.");
                 }
                 if (data.CurrentVersion[0] != Version[0])
                 {
                     Debug.LogWarning("Major/Year Version mismatch.");
-                    downloadResultText.setText("Warning: Majorly out of date. Please update ASAP.");
+                    uploadResultText.setText("Warning: Majorly out of date. Please update ASAP.");
                 }
             else
             {
-                downloadResultText.setText("Download complete.");
+                uploadResultText.setText("Download complete.");
             }
             //sw.Close();
             }
             else
             {
-                downloadResultText.setText("Error encountered downloading from server.");
+                uploadResultText.setText("Error encountered downloading from server.");
                 Debug.LogError("Code: " + www.responseCode + " Error: " + www.error);
             }
             www.Dispose();
