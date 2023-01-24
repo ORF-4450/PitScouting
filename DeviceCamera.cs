@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 public class DeviceCamera : MonoBehaviour
 {
-    private bool camAvailable;
+    private bool camAvailable; //Whether or not a camera was found
     private WebCamTexture backCam;
     private Texture defaultBackground;
 
@@ -38,12 +38,12 @@ public class DeviceCamera : MonoBehaviour
         if (devices.Length == 0) //Test if any cameras are avalible.
         {
             Debug.Log("No camera detected");
-            camAvailable = false;
+            camAvailable = false; //Record that a camera was not found
             return;
         }
 
         
-        if(SystemInfo.deviceModel == "Latitude 3420 (Dell Inc.)") //Test if running on dev PC. If so, use front cam. Else, use back cam
+        if(SystemInfo.deviceModel == "Latitude 3420 (Dell Inc.)") //Test if running on dev PC (PC's in Robotics Room). If so, use front cam (Cuz there isn't a back cam on the computer). Else, use back cam
         {
             backCam = new WebCamTexture(devices[0].name, Screen.width, Screen.height);
         } else {
@@ -58,9 +58,9 @@ public class DeviceCamera : MonoBehaviour
             
             
 
-        if(backCam == null) //Test if camera was found
+        if(backCam == null) //Test if camera wasn't found
         {
-            Debug.Log("Unable to find back camera");
+            Debug.Log("Unable to find back camera"); //If you're on a 'Latitude 3420 (Dell Inc.)', then your camera may be disabled.
             return;
         }
 
@@ -71,7 +71,7 @@ public class DeviceCamera : MonoBehaviour
         backCam.Play();
     }
 
-    private void Update()
+    private void Update() //Display image from camera every frame
     {
         if(!camAvailable || background.texture != backCam)
         return;
@@ -95,7 +95,7 @@ public class DeviceCamera : MonoBehaviour
 
     public void OnClicked() //function for the button to trigger
     {
-        Debug.Log("Clicked!");
+        Debug.Log("Clicked!"); //Yay! It clicked correctly!
         StartCoroutine(TakePhoto());
     }
     
@@ -114,9 +114,9 @@ public class DeviceCamera : MonoBehaviour
             //background.texture.height = backCam.height;
             //background.texture.width = backCam.width;
             Graphics.CopyTexture(background.texture, photo);
-            photo.SetPixels(photo.GetPixels());
+            photo.SetPixels(photo.GetPixels()); //Magic? Uneccesary? Bread.
             photo.Apply();
-            background.texture = null; //camera off to give illusion of flash
+            background.texture = null; //Camera off to give illusion of flash
 
             //Encode to a PNG
             byte[] bytes = photo.EncodeToPNG();
@@ -124,7 +124,7 @@ public class DeviceCamera : MonoBehaviour
             //byte[] bytes = GetComponent<Renderer>().material.mainTexture.EncodeToPNG();
             //Write out the PNG.
 
-            string filePath = Application.persistentDataPath + "/" + TeamNumber + ".png"; //Default path, may need adjusting if duplicate fils
+            string filePath = Application.persistentDataPath + "/" + TeamNumber + ".png"; //Default path, may need adjusting if duplicate files
             if (File.Exists(filePath))
             {
                 int maxCount = 1000;
@@ -142,7 +142,7 @@ public class DeviceCamera : MonoBehaviour
                 }
             }
             File.WriteAllBytes(filePath, bytes);
-            Debug.Log("Took Photo");
+            Debug.Log("Took Photo"); //Yay!
             yield return new WaitForSeconds(FlashWaitTime); //Keep camera off to give the illusion of a flash
             background.texture = backCam; //Turn camera back on
         }

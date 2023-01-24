@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class DataInputDropdown : DataInput {
 
     public DataStorage ds;
-    public Dropdown dropdown;
+    public Dropdown dropdown; //Script 'Dropdown' in input GameObject
 
     public override void changeData(object change)
     {

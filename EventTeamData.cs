@@ -16,9 +16,9 @@ public class EventTeamData : MonoBehaviour {
  
     public void Start()
     {
-        if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "data.json"))
+        if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "data.json")) //If File exists, run
         {
-            loadData(JsonUtility.FromJson<SyncData>(File.ReadAllText(Application.persistentDataPath + Path.DirectorySeparatorChar + "data.json")));
+            loadData(JsonUtility.FromJson<SyncData>(File.ReadAllText(Application.persistentDataPath + Path.DirectorySeparatorChar + "data.json"))); //Load data from data.json
         }
     }
 

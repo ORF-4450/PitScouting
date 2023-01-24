@@ -80,7 +80,7 @@ public class DataStorage : MonoBehaviour
             {
                 return false;
             }
-            data[key] = value;
+            data[key] = value; //Set the corresponding string for the string 'key' to value
             return true;
         }
     }
@@ -89,7 +89,7 @@ public class DataStorage : MonoBehaviour
     {
         try
         {
-            inputs.Add(key, DI);
+            inputs.Add(key, DI); //string 'key', and DataInput
             Debug.Log("Added input at key " + key);
         }
         catch (ArgumentNullException e)
@@ -187,7 +187,7 @@ public class DataStorage : MonoBehaviour
         if (lastPingTest)
         {
             StartCoroutine(downloadJson()); //Downloads server data to display events and team names.
-            StartCoroutine(uploadData());
+            StartCoroutine(uploadData()); //Reads .txt's the app has saved -> Formats -> Sends to GoogleForm -> GoogleForm Interprets -> GoogleForm Sends to the Google Form
         }
         else
         {
@@ -269,8 +269,8 @@ public class DataStorage : MonoBehaviour
             foreach (FileInfo file in dinfo.GetFiles())
             {
                 if (file.Extension.Equals(".txt") && file.Name.Contains(dataStorageKey) && !file.Name.Contains("data")){
-                    //if ()
-                        //continue;
+
+
 
                 Dictionary<string, string> formData = new Dictionary<string, string>();
                 formData["App"] = appName;

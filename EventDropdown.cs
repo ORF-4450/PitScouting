@@ -17,7 +17,7 @@ public class EventDropdown : DataInput {
         dropdown = GetComponent<Dropdown>();
         refresh();
         dropdown.AddOptions(new List<Dropdown.OptionData>() { new Dropdown.OptionData("ERR - Please Sync") });
-        dropdown.AddOptions(new List<Dropdown.OptionData>() { new Dropdown.OptionData("TestCompetition") });
+        //dropdown.AddOptions(new List<Dropdown.OptionData>() { new Dropdown.OptionData("TestCompetition") });//Doesn't work yet
         dropdown.RefreshShownValue();
         DS.addData("EventKey", "ERROR", true, this);
         DStwo.addData("EventKey", "ERROR", true, this);

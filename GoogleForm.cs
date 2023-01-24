@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoogleForm : MonoBehaviour
 {
-    [SerializeField] private string formURL;
+    [SerializeField] private string formURL; //Not the url that you would use to fill it out. Use inspect element to find it.
     public DataStorage DS;
     [SerializeField] string[] keys;
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class GoogleForm : MonoBehaviour
         //string[] keys = {"App","Version","ScouterName","EventKey","ScouterTeamNumber","TeamNumber","RobotNotes","Auto_LeftTarmac","Auto_BallThrown","Auto_Notes","Auto_LowerShots","Auto_UpperShots","Teleop_UpperShots","Teleop_LowerShots","Teleop_TerminalVisits","Strategy_Launchpad","Strategy_Shooting","Teleop_RequiresTerminal","Strategy_General","Teleop_Climb"};
         foreach (string key in keys)
         {
-            form.AddField(gFormID,key + ";" + data[key]); //Puts data into this format: KEY;VALUE, KEY;VALUE, KEY;VALUE
+            form.AddField(gFormID,key + ";" + data[key]); //Puts data into this format: "KEY;VALUE, KEY;VALUE, KEY;VALUE"
         }
         byte[] rawData = form.data; //Puts it into raw data
 

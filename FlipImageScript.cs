@@ -11,7 +11,7 @@ public class FlipImageScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (AnimationState state in Button.GetComponent<Animation>())
+        foreach (AnimationState state in Button.GetComponent<Animation>()) //Change speeds
         {
             state.speed = 2F;
         }

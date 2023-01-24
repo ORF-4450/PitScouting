@@ -14,7 +14,7 @@ public class DataCounter : DataInput {
     void Start () {
         if (ds == null)
         {
-            Debug.LogError(this.gameObject.name + " was unable to load because no DataStorage was attached!");
+            Debug.LogError(this.gameObject.name + " was unable to load because no DataStorage was attached!"); //ds = null
             this.gameObject.SetActive(false);
             return;
         }
