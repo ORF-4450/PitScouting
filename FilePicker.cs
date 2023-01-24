@@ -20,7 +20,7 @@ public class FilePicker : MonoBehaviour {
 
 	//This script runs the file selection menu.
 
-	public void loadMenu () {
+	public void loadMenu () { //Set hardcoded objects' SetActive bool to true, making them appear.
 		FileMenu.SetActive (true);
 		MainMenu.SetActive (true);
 		ScoutingMenu.SetActive (true);
@@ -54,18 +54,18 @@ public class FilePicker : MonoBehaviour {
 			return;
 		file = tmp_file;
 
-		if (file.Extension == ".txt")
+		if (file.Extension == ".txt") //If the file is a .txt, read as text
 		{
 			dataViewer.text = getStringFromFile(file);
 		}
-		if (file.Extension == ".png")
+		if (file.Extension == ".png") //if the file is a .png, read as a picture
 		{
-			DisplayedImage.enabled = true;
+			DisplayedImage.enabled = true; //Enable the RawImage
 			if (tmpFileName != Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text)
 			{
 				Texture2D tex = new Texture2D(2, 2);
-				tex.LoadImage(File.ReadAllBytes(Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text));
-				DisplayedImage.texture = tex;
+				tex.LoadImage(File.ReadAllBytes(Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text)); //Load the image into Texture2D tex
+				DisplayedImage.texture = tex; //Set RawImage to Texture2D tex
 				Debug.Log("LoadedImage");
 				tmpFileName = (Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text);
 			}
