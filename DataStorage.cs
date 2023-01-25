@@ -191,7 +191,7 @@ public class DataStorage : MonoBehaviour
         }
         else
         {
-            downloadResultText.setText("Failed to connect to server,");
+            uploadResultText.setText("Failed to connect to server,");
             uploadResultText.setText("please try again later.");
         }
     }
