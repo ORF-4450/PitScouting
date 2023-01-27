@@ -40,7 +40,9 @@ public class SidebarStates : MonoBehaviour
             break;
         }
 
-        foreach (GameObject gameObjectInList in Objects) //Set game objects to their respective activation booleans
+
+
+        foreach (GameObject gameObjectInList in Objects) //Set game objects to their respective activation booleans in BoolStateList
         {
             gameObjectInList.SetActive(BoolStateList[Objects.IndexOf(gameObjectInList)]);
         }

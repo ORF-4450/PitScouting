@@ -21,6 +21,8 @@ public class DataStorage : MonoBehaviour
     private UnityWebRequest currentUploadRequest;
     public ResultText uploadResultText;
     public ResultText downloadResultText;
+
+    private bool lastPingTest = false;
 //Having issues displaying these? Check out DataStorageEditor.cs
 
 
@@ -179,7 +181,6 @@ public class DataStorage : MonoBehaviour
       
     }
 
-    private bool lastPingTest = false;
     public IEnumerator syncRoutine()
     {
         yield return pingTest();
@@ -196,7 +197,7 @@ public class DataStorage : MonoBehaviour
         }
     }
 
-    private IEnumerator pingTest()
+    private IEnumerator pingTest() //If able to connect to the server, return true. Else, return false.
     {
         UnityWebRequest pingWebRequest = UnityWebRequest.Get(serverBaseURL + "/api/v1/ping.php");
         pingWebRequest.timeout = 5;
@@ -204,7 +205,7 @@ public class DataStorage : MonoBehaviour
         string text = pingWebRequest.downloadHandler.text;
         Debug.Log(text);
         pingWebRequest.Dispose();
-        lastPingTest = text == "pong";
+        lastPingTest = text == "pong"; //If text == "pong", set lastPingTest to true. If false, set it to false.
     }
     public IEnumerator downloadJson()
     {
@@ -359,7 +360,7 @@ public class SyncData
     public MatchSync[] EventMatches;
 }
 
-[System.Serializable] //I don't belive ValidatorData is used anymore
+[System.Serializable] //I don't belive ValidatorData is used anymore. Maybe we can delete it.
 public class ValidatorData //Used http://json2csharp.com/ to generate this.
 {
     public string App { get; set; }
