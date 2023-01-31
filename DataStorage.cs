@@ -10,7 +10,7 @@ public class DataStorage : MonoBehaviour
 {
     //#Data Storage Variables
         public Dictionary<string, string> data = new Dictionary<string, string>();
-        public Dictionary<string, DataInput> inputs = new Dictionary<string, DataInput>();\
+        public Dictionary<string, DataInput> inputs = new Dictionary<string, DataInput>();
     //
     public string serverBaseURL = "https://orf-4450scoutingapp.azurewebsites.net"; //Website to pull competition data off of.
     public string[] Version = { "2022", "0", "0" }; //Version number, doesn't mean much.
