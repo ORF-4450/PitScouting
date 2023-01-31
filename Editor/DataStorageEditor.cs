@@ -55,7 +55,7 @@ public class DataStorageEditor : Editor {
         Script.VARIABLE = GUILayout.TextField(Script.VARIABLE); //Sets variable to what is in the box
         GUILayout.EndHorizontal(); //Ends Data Input
         */
-//
+//Data Keys and Information
 		if (Script.data.Count <= 0) {
 			GUILayout.Label ("Currenty no data to display!");
 			return;
@@ -66,21 +66,22 @@ public class DataStorageEditor : Editor {
 			    GUILayout.Label (kvp.Value);
 			GUILayout.EndHorizontal ();
 		}
+//Save Button
 		if (GUILayout.Button ("Click to save to file and clear!")) {
 			StatusMessage = "Data saved to: " + Script.saveToFile (true);
 		}
-
+//Download Button
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Click to Download.")) //If button is true (clicked), run function
         {
             Script.StartCoroutine(Script.downloadJson());
         }
-
+//Sync Button
         if (GUILayout.Button("Click to Sync.")) //If button is true (clicked), run function
         {
             Script.sync();
         }
-
+//Upload Button        
         if (GUILayout.Button("Click to Upload.")) //If button is true (clicked), run function
         {
             Script.StartCoroutine(Script.uploadData());
