@@ -26,15 +26,19 @@ public class DeviceCamera : MonoBehaviour
 
     private void Start()
     {
+    //Slow Down Animations    
         foreach (AnimationState state in PhotoTakeButton.GetComponent<Animation>())
         {
             state.speed = 0.25F; //Set button animation speed, because it's too fast otherwise.
             //The button animation makes it grow and then shrink rapidly, letting users know the click registred.
         }
 
+
+
+    //
         defaultBackground = background.texture;
         WebCamDevice[] devices = WebCamTexture.devices;
-
+    //Are cameras available?
         if (devices.Length == 0) //Test if any cameras are avalible.
         {
             Debug.Log("No camera detected");
@@ -42,34 +46,39 @@ public class DeviceCamera : MonoBehaviour
             return;
         }
 
-        
+    //Development PC Settings
         if(SystemInfo.deviceModel == "Latitude 3420 (Dell Inc.)") //Test if running on dev PC (PC's in Robotics Room). If so, use front cam (Cuz there isn't a back cam on the computer). Else, use back cam
         {
             backCam = new WebCamTexture(devices[0].name, Screen.width, Screen.height);
-        } else {
+        }
+    //Set camera to back camera
+        else {
             for (int i = 0; i < devices.Length; i++)
             {
-                if(!devices[i].isFrontFacing)
+                if(!devices[i].isFrontFacing) //If camera is back facing
                 {
                     backCam = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
                 }
             }
         }
-            
+        //Error
             
 
-        if(backCam == null) //Test if camera wasn't found
-        {
-            Debug.Log("Unable to find back camera"); //If you're on a 'Latitude 3420 (Dell Inc.)', then your camera may be disabled.
-            return;
+                if(backCam == null) //Test if camera wasn't found
+            {
+                Debug.Log("Unable to find back camera"); //If you're on a 'Latitude 3420 (Dell Inc.)', then your camera may be disabled.
+                return;
+            }
+    //Set image to camera output, turn on camera
+
+
+            Camera.GetComponent<Renderer>().material.mainTexture = backCam;
+            background.texture = backCam;
+
+            camAvailable = true;
+            backCam.Play();
         }
-
-        Camera.GetComponent<Renderer>().material.mainTexture = backCam;
-        background.texture = backCam;
-
-        camAvailable = true;
-        backCam.Play();
-    }
+    //
 
     private void Update() //Display image from camera every frame
     {
@@ -84,13 +93,13 @@ public class DeviceCamera : MonoBehaviour
 
         int orient = -backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0,0,orient);
-
-        if (Picture.activeSelf == true) //This keeps the camera off when the viewing window is not shown
-        {
-            backCam.Play();
-        } else {
-            backCam.Stop();
-        }
+    //Camera off when not needed
+            if (Picture.activeSelf == true) //This keeps the camera off when the viewing window is not shown
+            {
+                backCam.Play();
+            } else {
+                backCam.Stop();
+            }
     }
 
     public void OnClicked() //function for the button to trigger
@@ -102,10 +111,11 @@ public class DeviceCamera : MonoBehaviour
 
     IEnumerator TakePhoto()  // Start this Coroutine to take the photo
     {
+    //If not playing animation, procceed and play animation    
         if (!PhotoTakeButton.GetComponent<Animation>().IsPlaying("ButtonPressed2")) //Dont take picture if the button is in it's animation.
         {
             PhotoTakeButton.GetComponent<Animation>().Play("ButtonPressed2"); //Button Animation
-
+    //
 
             string TeamNumber = DS.data["TeamNumber"];
             yield return new WaitForEndOfFrame();
@@ -147,7 +157,7 @@ public class DeviceCamera : MonoBehaviour
             background.texture = backCam; //Turn camera back on
         }
     }
-
+//Upload Images To Google Form
     /* THIS CODE DOES NOT WORK YET
     //IT TRIES TO UPLOAD A PNG TO A GOOGLE FORM THAT SENDS IT TO A GOOGLE SHEET WHERE IT'S VIEWABLE JUST LIKE THE OTHER DATA
     IEnumerator UploadPNG() {
@@ -181,4 +191,5 @@ public class DeviceCamera : MonoBehaviour
         Debug.Log("Sending File!");
         StartCoroutine(UploadPNG());
     } */
+//
 }

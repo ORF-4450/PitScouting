@@ -81,7 +81,7 @@ public class DataStorageEditor : Editor {
         {
             Script.sync();
         }
-//Upload Button        
+//Upload Button
         if (GUILayout.Button("Click to Upload.")) //If button is true (clicked), run function
         {
             Script.StartCoroutine(Script.uploadData());
