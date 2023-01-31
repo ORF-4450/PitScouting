@@ -8,19 +8,21 @@ using UnityEngine.Networking;
 
 public class DataStorage : MonoBehaviour
 {
-    public Dictionary<string, string> data = new Dictionary<string, string>();
-    public Dictionary<string, DataInput> inputs = new Dictionary<string, DataInput>();
+    //#Data Storage Variables
+        public Dictionary<string, string> data = new Dictionary<string, string>();
+        public Dictionary<string, DataInput> inputs = new Dictionary<string, DataInput>();\
+    //
     public string serverBaseURL = "https://orf-4450scoutingapp.azurewebsites.net"; //Website to pull competition data off of.
     public string[] Version = { "2022", "0", "0" }; //Version number, doesn't mean much.
     public GoogleForm GoogleForm;
 
     [SerializeField] public string dataStorageKey;
-    public string appName;
+    public string appName; //LEGACY
 
     private UnityWebRequest currentDownloadRequest;
     private UnityWebRequest currentUploadRequest;
     public ResultText uploadResultText;
-    public ResultText downloadResultText;
+    public ResultText downloadResultText; //LEGACY
 
     private bool lastPingTest = false;
 //Having issues displaying these? Check out DataStorageEditor.cs
@@ -273,58 +275,59 @@ public class DataStorage : MonoBehaviour
 
 
 
-                Dictionary<string, string> formData = new Dictionary<string, string>();
-                formData["App"] = appName;
-                // Open the stream and read it back.
-                using (StreamReader sr = file.OpenText())
-                {
-                    string s = "";
-                    while ((s = sr.ReadLine()) != null)
+                //Formatting in preparation for sending to GoogleForm.cs
+                    Dictionary<string, string> formData = new Dictionary<string, string>();
+                    formData["App"] = appName;
+                    // Open the stream and read it back.
+                    using (StreamReader sr = file.OpenText())
                     {
-                        Debug.Log(Application.persistentDataPath + "/" + file.Name);
-                        string[] data = s.Split(';');
+                        string s = "";
+                        while ((s = sr.ReadLine()) != null)
+                        {
+                            Debug.Log(Application.persistentDataPath + "/" + file.Name);
+                            string[] data = s.Split(';');
 
-                        
-                        uploadResultText.setText(file.Name + ":" + data[0] + " " + data[0]);
-                        if (data[1] == "") data[1] = "empty";
-                        formData[data[0]] = data[1];
-                        Debug.Log(file.Name + ":" + data[0] + " " + data[1]);
+                            
+                            uploadResultText.setText(file.Name + ":" + data[0] + " " + data[0]);
+                            if (data[1] == "") data[1] = "empty";
+                            formData[data[0]] = data[1];
+                            Debug.Log(file.Name + ":" + data[0] + " " + data[1]);
+                        }
                     }
-                }
                 Debug.Log("Creating request");
                 //UnityWebRequest uploadRequest = UnityWebRequest.Post(serverBaseURL + "/api/v1/submit.php", formData);
                 StartCoroutine(GoogleForm.Post(formData, "entry.1470553737"));
                 Debug.Log("Form upload begun for file " + file.Name);
-
-                /*currentUploadRequest = uploadRequest;
-                uploadRequest.chunkedTransfer = false;
-                yield return uploadRequest.SendWebRequest();
-                Debug.Log(uploadRequest.result);
-                if (uploadRequest.result != UnityWebRequest.Result.Success)
-{
-    // Error
-}
-else
-{
-}
-                Debug.Log(uploadRequest.downloadHandler.text);
-                if (!uploadRequest.isHttpError && JsonUtility.FromJson<ValidatorData>(uploadRequest.downloadHandler.text).App == formData["App"])
-                {
-                    file.Delete();
-                }
-                else
-                {
-                    //if (!uploadRequest.isHttpError) {
-                    //    Debug.LogError("!uploadRequest.isHttpError");
-                    //}
-                    if (!(uploadRequest.responseCode == 200))
+//
+                    /*currentUploadRequest = uploadRequest;
+                    uploadRequest.chunkedTransfer = false;
+                    yield return uploadRequest.SendWebRequest();
+                    Debug.Log(uploadRequest.result);
+                    if (uploadRequest.result != UnityWebRequest.Result.Success)
+    {
+        // Error
+    }
+    else
+    {
+    }
+                    Debug.Log(uploadRequest.downloadHandler.text);
+                    if (!uploadRequest.isHttpError && JsonUtility.FromJson<ValidatorData>(uploadRequest.downloadHandler.text).App == formData["App"])
                     {
-                        uploadResultText.setText("An error has occured.");
-                        Debug.LogError("Error uploading file " + file.Name + " Error Code: " + uploadRequest.responseCode);
+                        file.Delete();
                     }
-                    continue;
-                }*/
-
+                    else
+                    {
+                        //if (!uploadRequest.isHttpError) {
+                        //    Debug.LogError("!uploadRequest.isHttpError");
+                            //}
+                        if (!(uploadRequest.responseCode == 200))
+                        {
+                            uploadResultText.setText("An error has occured.");
+                            Debug.LogError("Error uploading file " + file.Name + " Error Code: " + uploadRequest.responseCode);
+                        }
+                        continue;
+                    }*/
+//
                 Debug.Log("Request complete.");
 
 
@@ -337,6 +340,7 @@ else
         currentUploadRequest = null;
         uploadResultText.setText("Uploading Complete");
     }
+
   public IEnumerator GetRequest(string endpoint, Action<UnityWebRequest> callback)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(endpoint))

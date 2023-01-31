@@ -31,7 +31,7 @@ public class DataStorageEditor : Editor {
         GUILayout.BeginHorizontal ("box"); //Begins Data Input 
 		    GUILayout.Label ("Base Server URL:"); //URL to recieve data for events from
 		    Script.serverBaseURL = GUILayout.TextField (Script.serverBaseURL);
-		GUILayout.EndHorizontal ();
+		GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal("box"); //Begins Data Input 
             GUILayout.Label("Google Form Script"); //Script DataStorage should refer to when uploading

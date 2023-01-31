@@ -19,12 +19,12 @@ public class DataToggle : DataInput { //More like "DataBool" or "DataCheckbox"
     public override void changeData(object change)
     {
         bool changeBool = false;
-        if (bool.TryParse(change.ToString(), out changeBool))
+        if (bool.TryParse(change.ToString(), out changeBool)) //Change object to boolean, set it to changeBool?
         {
             toggle.isOn = changeBool;
             return;
         }
-        Debug.LogWarning("Problem changinmg data for " + this.gameObject.name + " passed object " + change.ToString() + " instead of a boolean.");
+        Debug.LogWarning($"Problem changing data for {this.gameObject.name} passed object {change.ToString()} instead of a boolean.");
     }
 
     public override void clearData()
