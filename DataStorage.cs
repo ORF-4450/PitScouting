@@ -346,9 +346,9 @@ public class DataStorage : MonoBehaviour
         using (UnityWebRequest request = UnityWebRequest.Get(endpoint))
         {
             // Send the request and wait for a response
-            UnityWebRequestAsyncOperation test = request.SendWebRequest();
-            yield return test;
-            Debug.Log(test);
+            UnityWebRequestAsyncOperation webRequest = request.SendWebRequest();
+            yield return webRequest;
+            Debug.Log(webRequest);
             callback(request);
         }
     }
