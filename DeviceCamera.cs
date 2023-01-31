@@ -32,9 +32,6 @@ public class DeviceCamera : MonoBehaviour
             state.speed = 0.25F; //Set button animation speed, because it's too fast otherwise.
             //The button animation makes it grow and then shrink rapidly, letting users know the click registred.
         }
-
-
-
     //
         defaultBackground = background.texture;
         WebCamDevice[] devices = WebCamTexture.devices;
