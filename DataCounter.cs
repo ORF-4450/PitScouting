@@ -34,7 +34,7 @@ public class DataCounter : DataInput {
 
     public void adjustCount(int amountToChangeBy)
     {
-        count += amountToChangeBy;
+        count += amountToChangeBy; //add input to 'count'
     }
     
     public override void clearData()
