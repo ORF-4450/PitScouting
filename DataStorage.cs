@@ -363,27 +363,28 @@ public class SyncData
     public EventTeamList[] TeamsByEvent;
     public MatchSync[] EventMatches;
 }
-
-[System.Serializable] //I don't belive ValidatorData is used anymore. Maybe we can delete it.
-public class ValidatorData //Used http://json2csharp.com/ to generate this.
-{
-    public string App { get; set; }
-    public string Version { get; set; }
-    public string ScouterName { get; set; }
-    public string ScouterTeamNumber { get; set; }
-    public string EventKey { get; set; }
-    public string TeamNumber { get; set; }
-    public string Pre_StartingPos { get; set; }
-    public string Auto_CrossedBaseline { get; set; }
-    public string Auto_Notes { get; set; }
-    public string Auto_PlaceSwitch { get; set; }
-    public string Auto_PlaceScale { get; set; }
-    public string Teleop_ScalePlace { get; set; }
-    public string Teleop_SwitchPlace { get; set; }
-    public string Teleop_ExchangeVisit { get; set; }
-    public string RobotNotes { get; set; }
-    public string Teleop_Climb { get; set; }
-    public string Strategy_PowerUp { get; set; }
-    public string Strategy_General { get; set; }
-    public string NoAlliance { get; set; }
-}
+/* LEGACY
+    [System.Serializable]
+    public class ValidatorData //Used http://json2csharp.com/ to generate this.
+    {
+        public string App { get; set; }
+        public string Version { get; set; }
+        public string ScouterName { get; set; }
+        public string ScouterTeamNumber { get; set; }
+        public string EventKey { get; set; }
+        public string TeamNumber { get; set; }
+        public string Pre_StartingPos { get; set; }
+        public string Auto_CrossedBaseline { get; set; }
+        public string Auto_Notes { get; set; }
+        public string Auto_PlaceSwitch { get; set; }
+        public string Auto_PlaceScale { get; set; }
+        public string Teleop_ScalePlace { get; set; }
+        public string Teleop_SwitchPlace { get; set; }
+        public string Teleop_ExchangeVisit { get; set; }
+        public string RobotNotes { get; set; }
+        public string Teleop_Climb { get; set; }
+        public string Strategy_PowerUp { get; set; }
+        public string Strategy_General { get; set; }
+        public string NoAlliance { get; set; }
+    }
+*/
