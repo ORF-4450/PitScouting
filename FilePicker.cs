@@ -53,11 +53,12 @@ public class FilePicker : MonoBehaviour {
 		if (tmp_file.Equals(file))
 			return;
 		file = tmp_file;
-
+//Read .TXT
 		if (file.Extension == ".txt") //If the file is a .txt, read as text
 		{
 			dataViewer.text = getStringFromFile(file);
 		}
+//Read PNG
 		if (file.Extension == ".png") //if the file is a .png, read as a picture
 		{
 			DisplayedImage.enabled = true; //Enable the RawImage
@@ -72,6 +73,7 @@ public class FilePicker : MonoBehaviour {
 		} else {
 		DisplayedImage.enabled = false;
 		}
+//
 	}
 
 	public void Update() {
