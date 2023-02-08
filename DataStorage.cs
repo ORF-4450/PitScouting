@@ -157,8 +157,8 @@ public class DataStorage : MonoBehaviour
             {
                 if (inputs.ContainsKey(kvp.Key) && clear && !isStaticKey(kvp.Key) && (kvp.Key != excluded[0])) //Clear Function
                     inputs[kvp.Key].clearData();
-                string bufferText = kvp.Value.Replace(';', ':');
-                sw.WriteLine(kvp.Key + ";" + kvp.Value.Replace(',', 'ǂ'));
+                //string bufferText = kvp.Value.Replace(';', ':');
+                sw.WriteLine(kvp.Key + ";" + kvp.Value.Replace(',', 'ǂ').Replace(';', '╕').Replace(':', '╟'));
             }
         }
         return filePath;
