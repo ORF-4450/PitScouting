@@ -60,19 +60,15 @@ public class FilePicker : MonoBehaviour {
 		}
 //Read PNG
 		if (file.Extension == ".png") //if the file is a .png, read as a picture
-		{
-			// If I understand correctly getStringFromFile(tmp_file) might work better? If not why not make a string and set it to 
-			// Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text, and then just compare to 
-			// that string. Either of these would in my opinion increase readability
-			
+		{			
 			DisplayedImage.enabled = true; //Enable the RawImage 
-			if (tmpFileName != Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text)
+			if (tmpFileName != getStringFromFile(tmp_file))
 			{
 				Texture2D tex = new Texture2D(2, 2);
-				tex.LoadImage(File.ReadAllBytes(Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text)); //Load the image into Texture2D tex
+				tex.LoadImage(File.ReadAllBytes(getStringFromFile(tmp_file))); //Load the image into Texture2D tex
 				DisplayedImage.texture = tex; //Set RawImage to Texture2D tex
 				Debug.Log("LoadedImage");
-				tmpFileName = (Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text);
+				tmpFileName = getStringFromFile(tmp_file);
 			}
 		} else {
 		DisplayedImage.enabled = false;
