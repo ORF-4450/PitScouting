@@ -136,16 +136,22 @@ public class FilePicker : MonoBehaviour {
 		foreach (string line in raw.Split(new string[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)) {
 			if (line == null)
 				continue;
-			string[] broken = line.Split (';'); //Data split by the ";" character.
-			if (broken [0].Equals ("Version") && broken [1] != DS.data ["Version"]) {
-				resultText.text = "Error: Version mismatch between " + DS.data ["Version"] + " and " + broken [1];
+		//Format data to read
+			string[] brokenString = line.Split (';'); //Splits data by the ";" character.
+		//#Test for version mismatch
+			if (brokenString [0].Equals ("Version") && brokenString [1] != DS.data ["Version"]) {
+				resultText.text = "Error: Version mismatch between " + DS.data ["Version"] + " and " + brokenString [1];
 				return;
 			}
-			Debug.Log ("Attempting to access at key " + broken [0]);
-			if (!DS.inputs.ContainsKey(broken[0]))
+		//
+			Debug.Log ("Attempting to access at key " + brokenString [0]);
+		//If a key without a user input is encountered, stop.
+			if (!DS.inputs.ContainsKey(brokenString[0]))
 				continue;
-			DS.inputs[broken[0]].changeData(broken[1]);
+		//Set user input value to correlated value in brokenString
+			DS.inputs[broken[0]].changeData(brokenString[1]);
 			resultText.text = "The file has been loaded!";
+		//
 		}
 	}
 
