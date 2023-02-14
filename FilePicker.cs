@@ -60,12 +60,12 @@ public class FilePicker : MonoBehaviour {
 		if (tmp_file.Equals(file))
 			return;
 		file = tmp_file;
-	//Read .TXT
+	//If file is .TXT, read as text.
 		if (file.Extension == ".txt") //If the file is a .txt, read as text
 		{
 			dataViewer.text = getStringFromFile(file);
 		}
-	//Read PNG
+	//If file is .PNG, read as image
 		if (file.Extension == ".png") //if the file is a .png, read as a picture
 		{			
 			DisplayedImage.enabled = true; //Enable the RawImage 
@@ -107,7 +107,7 @@ public class FilePicker : MonoBehaviour {
 	public string getStringFromFile(FileInfo file) {
 	//#Stop if an error is encountered
         if (!file.Exists) return "File not found.";
-	//#Read file
+	//#Read .TXT file
 		StreamReader sr = file.OpenText();
 		string data = sr.ReadToEnd ();
 		sr.Close ();
