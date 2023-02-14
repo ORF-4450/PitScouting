@@ -104,7 +104,7 @@ public class FilePicker : MonoBehaviour {
 		}
 	}
 
-	public string getStringFromFile(FileInfo file) {
+	public string getStringFromFile(FileInfo file) { //Only works with .TXT files
 	//#Stop if an error is encountered
         if (!file.Exists) return "File not found.";
 	//#Read .TXT file
