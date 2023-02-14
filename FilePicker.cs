@@ -49,23 +49,23 @@ public class FilePicker : MonoBehaviour {
                 dataViewer.text = getStringFromFile(file);
             }
         }
-	//If file does not exist and is not null, set dropdown to 0 and stop.
+	//#If file does not exist and is not null, set dropdown to 0 and stop.
         if (file != null && !file.Exists)
         {
             dropdown.value = 0;
             dropdown.RefreshShownValue();
             return;
         }
-	//If file equals tmp_file, stop. Else, set file to tmp_file
+	//#If file equals tmp_file, stop. Else, set file to tmp_file
 		if (tmp_file.Equals(file))
 			return;
 		file = tmp_file;
-	//If file is .TXT, read as text.
+	//#If file is .TXT, read as text.
 		if (file.Extension == ".txt") //If the file is a .txt, read as text
 		{
 			dataViewer.text = getStringFromFile(file);
 		}
-	//If file is .PNG, read as image
+	//#If file is .PNG, read as image
 		if (file.Extension == ".png") //if the file is a .png, read as a picture
 		{			
 			DisplayedImage.enabled = true; //Enable the RawImage 
@@ -115,12 +115,12 @@ public class FilePicker : MonoBehaviour {
 	}
 
 	public void loadFromSelectedFile() {
-	//Stop if an error is encountered
+	//#Stop if an error is encountered
 		if (file == null)
 			return;
 	//
 		string raw = getStringFromFile (file);\
-	//By deafult, data is invalid. If a version tag is included, it becomes valid data.
+	//#By deafult, data is invalid. If a version tag is included, it becomes valid data.
 		bool valid = false;
 		foreach (string line in raw.Split(new string[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)) {
 			if (line.Split (';') [0] == "Version")
@@ -162,7 +162,7 @@ public class FilePicker : MonoBehaviour {
                 resultText.text = "Deleted file " + file.Name;
             }
         }
-	//Delete downloaded files
+	//#Delete downloaded files
         resultText.text = "Finished deleting unuploaded files. Clearing uploaded files.";
         DirectoryInfo uploaded = new DirectoryInfo(Application.persistentDataPath + Path.DirectorySeparatorChar + "uploaded");
         if (uploaded.Exists)
