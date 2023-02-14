@@ -41,8 +41,8 @@ public class FilePicker : MonoBehaviour {
 		if (dropdown.value == 0 || dropdown.options[dropdown.value].text == ".DS_Store")
 			return;
 	//
-		string tmp_path = (Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text);
-		FileInfo tmp_file = new FileInfo tmp_path;
+		string tmp_path = Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text;
+		FileInfo tmp_file = new FileInfo (Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text);
 	//#If file is empty, set file to tmp_file
         if (file == null)
         {
