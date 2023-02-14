@@ -119,7 +119,7 @@ public class FilePicker : MonoBehaviour {
 		if (file == null)
 			return;
 	//
-		string raw = getStringFromFile (file);\
+		string raw = getStringFromFile (file);
 	//#By deafult, data is invalid. If a version tag is included, it becomes valid data.
 		bool valid = false;
 		foreach (string line in raw.Split(new string[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)) {
