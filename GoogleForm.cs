@@ -24,7 +24,7 @@ public class GoogleForm : MonoBehaviour
         Debug.Log("Ran!");
         WWWForm form = new WWWForm();
 
-        //Sends in this order
+        //Sends in this order:
         //string[] keys = {"App","Version","ScouterName","EventKey","ScouterTeamNumber","TeamNumber","RobotNotes","Auto_LeftTarmac","Auto_BallThrown","Auto_Notes","Auto_LowerShots","Auto_UpperShots","Teleop_UpperShots","Teleop_LowerShots","Teleop_TerminalVisits","Strategy_Launchpad","Strategy_Shooting","Teleop_RequiresTerminal","Strategy_General","Teleop_Climb"};
         foreach (string key in keys)
         {

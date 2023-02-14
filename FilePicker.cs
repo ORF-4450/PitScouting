@@ -33,7 +33,6 @@ public class FilePicker : MonoBehaviour {
 	//
 	}
 
-
 	public void LateUpdate() {
 	//#Stop if dropdown has unexpected value
 		if (dropdown == null)
@@ -140,7 +139,7 @@ public class FilePicker : MonoBehaviour {
 		foreach (string line in raw.Split(new string[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)) {
 			if (line == null)
 				continue;
-		//Format data to read
+		//#Format data to read
 			string[] brokenString = line.Split (';'); //Splits data by the ";" character.
 		//#Test for version mismatch
 			if (brokenString [0].Equals ("Version") && brokenString [1] != DS.data ["Version"]) {
@@ -149,10 +148,10 @@ public class FilePicker : MonoBehaviour {
 			}
 		//
 			Debug.Log ("Attempting to access at key " + brokenString [0]);
-		//If a key without a user input is encountered, stop.
+		//#If a key without a user input is encountered, stop.
 			if (!DS.inputs.ContainsKey(brokenString[0]))
 				continue;
-		//Set user input value to correlated value in brokenString
+		//#Set user input value to correlated value in brokenString
 			DS.inputs[brokenString[0]].changeData(brokenString[1]);
 			resultText.text = "The file has been loaded!";
 		//
