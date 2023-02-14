@@ -12,12 +12,14 @@ public class DataCounter : DataInput {
 
     // Use this for initialization
     void Start () {
+    //#Return Error if unknown DataStorage
         if (ds == null)
         {
             Debug.LogError(this.gameObject.name + " was unable to load because no DataStorage was attached!"); //ds = null
             this.gameObject.SetActive(false);
             return;
         }
+    //
         text = GetComponent<Text>();
 	}
 

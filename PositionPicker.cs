@@ -17,6 +17,7 @@ public class PositionPicker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    //#Make sure button can be pressed ONLY on the image, not transparent parts.
         if (fullButton == false)
         {
         GetComponent<Image>().alphaHitTestMinimumThreshold = 0.5f;

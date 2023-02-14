@@ -41,7 +41,7 @@ public class TeamDropdown : DataInput
         {
             tmpList.Add(new Dropdown.OptionData(ti.team_number + " - " + ti.nickname));
         }
-    //Clear and refresh with the new data
+    //#Clear and refresh with the new data
         clear();
         dropdown.AddOptions(tmpList);
         dropdown.RefreshShownValue();

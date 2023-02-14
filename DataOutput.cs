@@ -11,7 +11,9 @@ public class DataOutput : MonoBehaviour {
 	private Text text;
 
 	void Start () {
+	//#Disappear if error is encountered
 		if (DS == null || key == null) this.enabled = false;
+	//
 		text = GetComponent<Text> ();
 	}
 	

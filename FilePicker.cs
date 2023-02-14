@@ -20,18 +20,20 @@ public class FilePicker : MonoBehaviour {
 
 	//This script runs the file selection menu.
 
-//#Show Menus. This allows the script to load data into *every* object when data is loaded.
 	public void loadMenu () { //Set hardcoded objects' SetActive bool to true, making them appear.
+	//#Show Menus. This allows the script to load data into *every* object when data is loaded.
 		FileMenu.SetActive (true);
 		MainMenu.SetActive (true);
 		ScoutingMenu.SetActive (true);
 	}
 
-//#Set DS to <DataStorage> component
 	public void Start() {
+	//#Set DS to <DataStorage> component
 		DS = GetComponent<DataStorage>();
+	//
 	}
-//
+
+
 	public void LateUpdate() {
 	//#Stop if dropdown has unexpected value
 		if (dropdown == null)
@@ -40,6 +42,7 @@ public class FilePicker : MonoBehaviour {
 			return;
 	//
 		FileInfo tmp_file = new FileInfo (Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text);
+		string tmp_path = (Application.persistentDataPath + Path.DirectorySeparatorChar + dropdown.captionText.text);
 	//#If file is empty, set file to tmp_file
         if (file == null)
         {
@@ -69,13 +72,14 @@ public class FilePicker : MonoBehaviour {
 		if (file.Extension == ".png") //if the file is a .png, read as an image
 		{			
 			DisplayedImage.enabled = true; //Enable the RawImage 
-			if (tmpFileName != getStringFromFile(tmp_file))
+			if (tmpFileName != tmp_path)
 			{
 				Texture2D tex = new Texture2D(2, 2);
-				tex.LoadImage(File.ReadAllBytes(getStringFromFile(tmp_file))); //Load the image into Texture2D tex
+				Debug.Log(tmp_path);
+				tex.LoadImage(File.ReadAllBytes(tmp_path)); //Load the image into Texture2D tex
 				DisplayedImage.texture = tex; //Set RawImage to Texture2D tex
 				Debug.Log("LoadedImage");
-				tmpFileName = getStringFromFile(tmp_file);
+				tmpFileName = tmp_path;
 			}
 		} else {
 		DisplayedImage.enabled = false;
@@ -149,7 +153,7 @@ public class FilePicker : MonoBehaviour {
 			if (!DS.inputs.ContainsKey(brokenString[0]))
 				continue;
 		//Set user input value to correlated value in brokenString
-			DS.inputs[broken[0]].changeData(brokenString[1]);
+			DS.inputs[brokenString[0]].changeData(brokenString[1]);
 			resultText.text = "The file has been loaded!";
 		//
 		}
