@@ -26,6 +26,8 @@ public class PositionPicker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    //#Set launch button to the correct button (Pit or Stands scouting)
+        //The Launch Button is the button that sends the user to the Stands or Pit scouting menus.
         if (PS.buttonName == buttonName) {
             GetComponent<Image>().sprite = ON;
             if (buttonName == "Cam") LaunchButton.SwitchState(1);
@@ -33,6 +35,7 @@ public class PositionPicker : MonoBehaviour
             GetComponent<Image>().sprite = OFF;
             if (buttonName == "Cam") LaunchButton.SwitchState(0);
         }
+    //
     }
 
     public void selectButton()

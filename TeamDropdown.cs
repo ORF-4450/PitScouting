@@ -36,13 +36,16 @@ public class TeamDropdown : DataInput
     public void refresh()
     {
         List<Dropdown.OptionData> tmpList = new List<Dropdown.OptionData>();
+    //#Read team numbers and names.
         foreach (TeamInfo ti in ETD.getTeams(ETD.getSelectedEvent().key))
         {
             tmpList.Add(new Dropdown.OptionData(ti.team_number + " - " + ti.nickname));
         }
+    //Clear and refresh with the new data
         clear();
         dropdown.AddOptions(tmpList);
         dropdown.RefreshShownValue();
+    //
     }
 
     public override void changeData(object change)

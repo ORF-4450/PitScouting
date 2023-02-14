@@ -66,7 +66,7 @@ public class FilePicker : MonoBehaviour {
 			dataViewer.text = getStringFromFile(file);
 		}
 	//#If file is .PNG, read as image
-		if (file.Extension == ".png") //if the file is a .png, read as a picture
+		if (file.Extension == ".png") //if the file is a .png, read as an image
 		{			
 			DisplayedImage.enabled = true; //Enable the RawImage 
 			if (tmpFileName != getStringFromFile(tmp_file))
@@ -80,7 +80,7 @@ public class FilePicker : MonoBehaviour {
 		} else {
 		DisplayedImage.enabled = false;
 		}
-//
+	//
 	}
 
 	public void Update() {
