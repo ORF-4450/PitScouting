@@ -135,6 +135,7 @@ public class DataStorage : MonoBehaviour
         string filePath = Application.persistentDataPath + Path.DirectorySeparatorChar + dataStorageKey + data["TeamNumber"] + ".txt"; //Default path, may need adjusting if duplicate fils
         if (File.Exists(filePath))
         {
+        //#Test file names until one is available
             int maxCount = 1000;
             for (int i = 1; i < maxCount + 1; i++)
             {
@@ -149,15 +150,16 @@ public class DataStorage : MonoBehaviour
                     return "error";
                 }
             }
+        //
         }
         using (StreamWriter sw = File.CreateText(filePath))
         {
-            string[] excluded = {"Pre_StartingPos","Teleop_Climb"};
+            string[] excluded = {"Pre_StartingPos","Teleop_Climb"}; //idk if this does much anymore
             foreach (KeyValuePair<string, string> kvp in data)
             {
                 if (inputs.ContainsKey(kvp.Key) && clear && !isStaticKey(kvp.Key) && (kvp.Key != excluded[0])) //Clear Function
                     inputs[kvp.Key].clearData();
-                sw.WriteLine(kvp.Key + ";" + kvp.Value.Replace(',', 'ǂ').Replace(';', '╕').Replace(':', '╟'));
+                sw.WriteLine(kvp.Key + ";" + kvp.Value.Replace(',', 'ǂ').Replace(';', '╕').Replace(':', '╟')); //Encode trouble causing characters to non-trouble causing ones.
             }
         }
         return filePath;
@@ -170,16 +172,16 @@ public class DataStorage : MonoBehaviour
 
     public void sync() //Syncs the app to the server.
     {
-
+    //#No Internet
       if(Application.internetReachability == NetworkReachability.NotReachable)
       {
           Debug.Log("Error. Check internet connection!");
       } else
       {
+    //#Sync To Server
           Debug.Log("Success! Internet Avalible.");
         StartCoroutine(syncRoutine());
       }
-      
     }
 
     public IEnumerator syncRoutine()
@@ -191,6 +193,8 @@ public class DataStorage : MonoBehaviour
             StartCoroutine(downloadJson()); //Downloads server data to display events and team names.
             StartCoroutine(uploadData()); //Reads .txt's the app has saved -> Formats -> Sends to GoogleForm -> GoogleForm Interprets -> GoogleForm Sends to the Google Form
         }
+
+    //#Cannot Connect To Server
         else
         {
             uploadResultText.setText("Failed to connect to server,");
@@ -208,32 +212,37 @@ public class DataStorage : MonoBehaviour
         pingWebRequest.Dispose();
         lastPingTest = text == "pong"; //If text == "pong", set lastPingTest to true. If false, set it to false.
     }
+
+    
     public IEnumerator downloadJson()
     {
         Debug.Log("Starting download of JSON");
         UnityWebRequest www = UnityWebRequest.Get(serverBaseURL + "/api/v1/syncDownload.php");
         {
+        //#Create Web Request
             Debug.Log("Starting download of JSON");
             currentDownloadRequest = www;
             yield return www.SendWebRequest();
             Debug.Log("Server Files Retrived:" + www.downloadHandler.text);
             currentDownloadRequest = null;
             Debug.Log("Download Completed.");
-
         StartCoroutine(GetRequest(serverBaseURL,(UnityWebRequest req) =>
         {
+        //#Download Data
             if (!(req.result == UnityWebRequest.Result.ProtocolError))
             {
+            //#Clear and Retrieve New Data
                 GetComponent<EventTeamData>().clearData();
                 SyncData data = JsonUtility.FromJson<SyncData>(www.downloadHandler.text);
                 GetComponent<EventTeamData>().loadData(data);
-
+            //#Delete Old Data Files
                 if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "data.json"))
                 File.Delete(Application.persistentDataPath + Path.DirectorySeparatorChar + "data.json");
-
+            //#Save New Data In File
                 StreamWriter sw = File.CreateText(Application.persistentDataPath + Path.DirectorySeparatorChar + "data.json");
                 sw.Write(www.downloadHandler.text);
                 sw.Close();
+            //#Version Mismatch Handling
                 if (data.CurrentVersion[2] != Version[2])
                 {
                     Debug.Log("Revision Version mismatch.");
@@ -248,17 +257,20 @@ public class DataStorage : MonoBehaviour
                     Debug.LogWarning("Major/Year Version mismatch.");
                     uploadResultText.setText("Warning: Majorly out of date. Please update ASAP."); //This means the app version number does not match that of the server.
                 }
+        //#Download Complete
+            //When a Protocol Error happens, the download is complete.
             else
             {
                 uploadResultText.setText("Download complete.");
             }
-            //sw.Close();
             }
+        //#Error Handling
             else
             {
                 uploadResultText.setText("Error encountered downloading from server.");
                 Debug.LogError("Code: " + www.responseCode + " Error: " + www.error);
             }
+        //#End Web Request
             www.Dispose();
         }));
         }
@@ -270,66 +282,65 @@ public class DataStorage : MonoBehaviour
 
             foreach (FileInfo file in dinfo.GetFiles())
             {
-                if (file.Extension.Equals(".txt") && file.Name.Contains(dataStorageKey) && !file.Name.Contains("data")){
+                if (file.Extension.Equals(".txt") && file.Name.Contains(dataStorageKey) && !file.Name.Contains("data")){ //If file is a text file containing scouted data
 
-
-
-                //Formatting in preparation for sending to GoogleForm.cs
-                    Dictionary<string, string> formData = new Dictionary<string, string>();
-                    formData["App"] = appName;
-                    // Open the stream and read it back.
-                    using (StreamReader sr = file.OpenText())
+            //#Format in preparation for GoogleForm.cs
+                Dictionary<string, string> formData = new Dictionary<string, string>();
+                formData["App"] = appName;
+                // Open the stream and read it back.
+                using (StreamReader sr = file.OpenText())
+                {
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null)
                     {
-                        string s = "";
-                        while ((s = sr.ReadLine()) != null)
-                        {
-                            Debug.Log(Application.persistentDataPath + "/" + file.Name);
-                            string[] data = s.Split(';');
-
-                            
-                            uploadResultText.setText(file.Name + ":" + data[0] + " " + data[0]);
-                            if (data[1] == "") data[1] = "empty";
-                            formData[data[0]] = data[1];
-                            Debug.Log(file.Name + ":" + data[0] + " " + data[1]);
-                        }
+                        Debug.Log(Application.persistentDataPath + "/" + file.Name);
+                        string[] data = s.Split(';');
+                        
+                        uploadResultText.setText(file.Name + ":" + data[0] + " " + data[0]);
+                        if (data[1] == "") data[1] = "empty";
+                        formData[data[0]] = data[1];
+                        Debug.Log(file.Name + ":" + data[0] + " " + data[1]);
                     }
+                }
+            //#Send File To GoogleForm.cs
                 Debug.Log("Creating request");
                 //UnityWebRequest uploadRequest = UnityWebRequest.Post(serverBaseURL + "/api/v1/submit.php", formData);
                 StartCoroutine(GoogleForm.Post(formData, "entry.1470553737"));
                 Debug.Log("Form upload begun for file " + file.Name);
-//
-                    /*currentUploadRequest = uploadRequest;
-                    uploadRequest.chunkedTransfer = false;
-                    yield return uploadRequest.SendWebRequest();
-                    Debug.Log(uploadRequest.result);
-                    if (uploadRequest.result != UnityWebRequest.Result.Success)
-    {
-        // Error
-    }
-    else
-    {
-    }
-                    Debug.Log(uploadRequest.downloadHandler.text);
-                    if (!uploadRequest.isHttpError && JsonUtility.FromJson<ValidatorData>(uploadRequest.downloadHandler.text).App == formData["App"])
+
+                //#OLD CODE TO SEND TO SERVER
+                                    /*currentUploadRequest = uploadRequest;
+                                    uploadRequest.chunkedTransfer = false;
+                                    yield return uploadRequest.SendWebRequest();
+                                    Debug.Log(uploadRequest.result);
+                                    if (uploadRequest.result != UnityWebRequest.Result.Success)
                     {
-                        file.Delete();
+                        // Error
                     }
                     else
                     {
-                        //if (!uploadRequest.isHttpError) {
-                        //    Debug.LogError("!uploadRequest.isHttpError");
-                            //}
-                        if (!(uploadRequest.responseCode == 200))
-                        {
-                            uploadResultText.setText("An error has occured.");
-                            Debug.LogError("Error uploading file " + file.Name + " Error Code: " + uploadRequest.responseCode);
-                        }
-                        continue;
-                    }*/
-//
+                    }
+                                    Debug.Log(uploadRequest.downloadHandler.text);
+                                    if (!uploadRequest.isHttpError && JsonUtility.FromJson<ValidatorData>(uploadRequest.downloadHandler.text).App == formData["App"])
+                                    {
+                                        file.Delete();
+                                    }
+                                    else
+                                    {
+                                        //if (!uploadRequest.isHttpError) {
+                                        //    Debug.LogError("!uploadRequest.isHttpError");
+                                            //}
+                                        if (!(uploadRequest.responseCode == 200))
+                                        {
+                                            uploadResultText.setText("An error has occured.");
+                                            Debug.LogError("Error uploading file " + file.Name + " Error Code: " + uploadRequest.responseCode);
+                                        }
+                                        continue;
+                                    }*/
+                //
+
                 Debug.Log("Request complete.");
-
-
+            //#File is Not Scouted Text Data
                 yield return new WaitForSeconds(0.25f);
                 } else {
                     Debug.Log(file.Name + " Failed Upload");

@@ -108,12 +108,11 @@ public class DeviceCamera : MonoBehaviour
 
     IEnumerator TakePhoto()  // Start this Coroutine to take the photo
     {
-    //#If not playing animation, procceed and play animation    
+    //#If not playing animation, continue and play animation    
         if (!PhotoTakeButton.GetComponent<Animation>().IsPlaying("ButtonPressed2")) //Dont take picture if the button is in it's animation.
         {
             PhotoTakeButton.GetComponent<Animation>().Play("ButtonPressed2"); //Button Animation
-    //
-
+    //  {
             string TeamNumber = DS.data["TeamNumber"];
             yield return new WaitForEndOfFrame();
 
