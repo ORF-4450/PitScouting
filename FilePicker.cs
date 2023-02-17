@@ -91,14 +91,13 @@ public class FilePicker : MonoBehaviour {
 		} else {
 		DisplayedImage.enabled = false;
 		}
-	//
 	}
 
 	public void Update() {
 	//#Stop if dropdown has unexpected value
 		if (dropdown == null)
 			return;
-	//
+	//#Setup Dropdown
 		List<Dropdown.OptionData> files = new List<Dropdown.OptionData>();
 		DirectoryInfo directory = new DirectoryInfo (Application.persistentDataPath);
 		files.Add (new Dropdown.OptionData("Choose a file"));
@@ -162,7 +161,6 @@ public class FilePicker : MonoBehaviour {
 		//#Set user input value to correlated value in brokenString
 			DS.inputs[brokenString[0]].changeData(brokenString[1]);
 			resultText.text = "The file has been loaded!";
-		//
 		}
 	}
 

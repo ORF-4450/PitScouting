@@ -45,7 +45,6 @@ public class TeamDropdown : DataInput
         clear();
         dropdown.AddOptions(tmpList);
         dropdown.RefreshShownValue();
-    //
     }
 
     public override void changeData(object change)
