@@ -7,14 +7,23 @@ using System;
 
 public class FilePicker : MonoBehaviour {
 	public DataStorage DS;
+	//DataStorage to work with
 	public GameObject MainMenu;
+	//Starting Menu Objects
 	public GameObject ScoutingMenu;
+	//Scouting Menu Objects
 	public GameObject FileMenu;
+	//File Menu Objects
 	public Dropdown dropdown;
+	//Dropdown with file options
 	public Text dataViewer;
+	//Place to show text from .txt file
 	public FileInfo file;
+	//File that is being worked with
 	public Text resultText;
+	//Place to put error text
 	public RawImage DisplayedImage;
+	//Place to display image
 
 	private string tmpFileName = null;
 
@@ -30,7 +39,6 @@ public class FilePicker : MonoBehaviour {
 	public void Start() {
 	//#Set DS to <DataStorage> component
 		DS = GetComponent<DataStorage>();
-	//
 	}
 
 	public void LateUpdate() {
@@ -129,7 +137,7 @@ public class FilePicker : MonoBehaviour {
 			if (line.Split (';') [0] == "Version")
 				valid = true;
 		}
-		//If error is encountered, send warning message and stop.
+		//#If error is encountered, send warning message and stop.
 			if (!valid) {
 				resultText.text = "Error: File is not valid, missing Version tag.";
         	    Debug.LogWarning("Error: File is not valid, missing Version tag. Raw data: " + raw);
