@@ -34,19 +34,19 @@ public class FlipImageScript : MonoBehaviour
     public void Flip()
     {
     //Button Press Animation
-        if (!Button.GetComponent<Animation>().IsPlaying("ButtonPressed")) //If the button NOT is playing it's "pressed" animation
+        Animation animButton = Button.GetComponent<Animation>();
+        Animation anim = GetComponent<Animation>();
+        if (!animButton.IsPlaying("ButtonPressed")) //If the button NOT is playing it's "pressed" animation
         {
-            Button.GetComponent<Animation>().Play("ButtonPressed"); //Play the button animation
+            animButton.Play("ButtonPressed"); //Play the button animation
     //Pick Correct Spin Animation
             if (flipped == true) //If that was true, Find out if it has been flipped or not
             {
-                GetComponent<Animation>().Play("SelectionButtonSpinCW"); //If it has been flipped, unflip it
+                anim.Play("SelectionButtonSpinCW"); //If it has been flipped, unflip it
             } else {
-                GetComponent<Animation>().Play("SelectionButtonSpinCCW"); //If it hasn't been flipped, flip it
+                anim.Play("SelectionButtonSpinCCW"); //If it hasn't been flipped, flip it
             }
-    //
-            Animation anim = GetComponent<Animation>(); //Not sure if this does anything anymore.
-            
+    //  {
             flipped = !flipped; //Change the boolean for flipping to tell the script whether or not the buttons have been flipped.
         }
         

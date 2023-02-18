@@ -10,19 +10,20 @@ public class TeamDropdown : DataInput
     public Dropdown dropdown;
     public EventTeamData ETD;
     public DataStorage DS;
+    private string DefaultText = "ERR - Please Sync";
 
     // Use this for initialization
     void Start()
     {
         refresh();
-        dropdown.AddOptions(new List<Dropdown.OptionData>() { new Dropdown.OptionData("ERR - Please Sync") });
+        dropdown.AddOptions(new List<Dropdown.OptionData>() { new Dropdown.OptionData(DefaultText) });
         dropdown.RefreshShownValue();
         DS.addData("TeamNumber", "0", true, this);
     }
 
     void LateUpdate()
     {
-        if (dropdown.captionText.text == "ERR - Please Sync") return;
+        if (dropdown.captionText.text == DefaultText) return;
         string teamNumber = dropdown.captionText.text.Split(' ')[0];
         DS.addData("TeamNumber", teamNumber.Split(' ')[0], true);
     }

@@ -163,7 +163,6 @@ public class FilePicker : MonoBehaviour {
 			resultText.text = "The file has been loaded!";
 		}
 	}
-
     public void clearFiles()
     {
         DirectoryInfo directory = new DirectoryInfo(Application.persistentDataPath);
