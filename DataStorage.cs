@@ -179,7 +179,7 @@ public class DataStorage : MonoBehaviour
       } else
       {
     //#Sync To Server
-          Debug.Log("Success! Internet Avalible.");
+          Debug.Log("Success! Internet Available.");
         StartCoroutine(syncRoutine());
       }
     }
