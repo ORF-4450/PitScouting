@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
+using UnityEngine.UI; //For Button Interaction "onClick.AddListener"
 
 //Attach to anything with a button
 //Button must have scale of 1 by 1
 
 public class ButtonMash : MonoBehaviour
 {
-    [SerializeField] private AnimationClip animClip;
+    private AnimationClip animClip;
     private GameObject animStore; //GameObject storing animations
     private Animation anim;
     private string animName = "ButtonMashAnimation"; //Doesn't matter what this is

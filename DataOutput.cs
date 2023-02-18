@@ -14,7 +14,7 @@ public class DataOutput : MonoBehaviour {
 	//#Disappear if error is encountered
 		if (DS == null || key == null) this.enabled = false;
 	//
-		text = GetComponent<Text> ();
+		text = GetComponent<Text>();
 	}
 	
 	void LateUpdate () {
