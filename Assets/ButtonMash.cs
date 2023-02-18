@@ -6,9 +6,6 @@ using UnityEngine.UI;
 //Attach to anything with a button
 //Button must have scale of 1 by 1
 
-
-
-
 public class ButtonMash : MonoBehaviour
 {
     [SerializeField] private AnimationClip animClip;
