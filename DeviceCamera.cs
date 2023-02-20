@@ -123,31 +123,36 @@ public class DeviceCamera : MonoBehaviour
             photo.Apply();
             background.texture = null; //Camera off to give illusion of flash
 
-            //Encode to a PNG
+        //#Encode to a PNG
             byte[] bytes = photo.EncodeToPNG();
             Destroy(photo);
-            //byte[] bytes = GetComponent<Renderer>().material.mainTexture.EncodeToPNG();
-            //Write out the PNG.
+        //#Get filepath to push photo to
+            //Get Default filepath
+                string filePath = Application.persistentDataPath + "/" + TeamNumber + ".png";
+            //
 
-            string filePath = Application.persistentDataPath + "/" + TeamNumber + ".png"; //Default path, may need adjusting if duplicate files
             if (File.Exists(filePath))
             {
                 int maxCount = 1000;
                 for (int i = 1; i < maxCount + 1; i++) //code from DataStore
                 {
                     string tmpFilePath = Application.persistentDataPath + "/" + TeamNumber + "-" + (maxCount - i + 1) + ".png"; //Try different possibilities until 1000, then give up
+                //#Test filepath against existing files
                     if (!File.Exists(tmpFilePath))
                     {
                         filePath = tmpFilePath;
                     }
+                //#Error: over 1000 photos for this team
                     if (i == maxCount && filePath == Application.persistentDataPath + "/" + TeamNumber + ".png")
                     {
                         Debug.LogError("Too many files! Couldn't save data, not clearing"); //Remnant of old code
                     }
                 }
             }
+        //#Save Photo
             File.WriteAllBytes(filePath, bytes);
             Debug.Log("Took Photo"); //Yay!
+        //#Flash Illusion
             yield return new WaitForSeconds(FlashWaitTime); //Keep camera off to give the illusion of a flash
             background.texture = backCam; //Turn camera back on
         }

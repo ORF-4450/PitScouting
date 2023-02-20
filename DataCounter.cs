@@ -9,7 +9,7 @@ public class DataCounter : DataInput {
     public string suffix; //String to put after number when displaying
     Text text; //Place to show number
     int defaultCount = 0;
-    int count; //default count
+    int count;
 
     // Use this for initialization
     void Start () {
@@ -41,7 +41,7 @@ public class DataCounter : DataInput {
     public void adjustCount(int amountToChangeBy)
     {
         count += amountToChangeBy; //add input to 'count'
-        if (count < 0) count = (count + 1);
+        if (count < 0) count = 0;
     }
     
     public override void clearData()

@@ -29,6 +29,7 @@ public class DataToggle : DataInput { //More like "DataBool" or "DataCheckbox"
 
     public override void clearData()
     {
+    //#Set checkbox to off
         toggle.isOn = false;
     }
 
