@@ -4,14 +4,16 @@ using System.Collections;
 
 public class DataCounter : DataInput {
 
-    public DataStorage ds;
-    public string prefix;
-    public string suffix;
-    Text text;
-    int count = 0;
+    public DataStorage ds; //Datastorage script to save count to 
+    public string prefix; //String to put before number when displaying
+    public string suffix; //String to put after number when displaying
+    Text text; //Place to show number
+    int defaultCount = 0;
+    int count; //default count
 
     // Use this for initialization
     void Start () {
+        count = defaultCount;
     //#Return Error if unknown DataStorage
         if (ds == null)
         {
@@ -19,13 +21,15 @@ public class DataCounter : DataInput {
             this.gameObject.SetActive(false);
             return;
         }
-    //
+    //#Find text component that shows the number
         text = GetComponent<Text>();
 	}
 
     void FixedUpdate()
     {
+    //#Set respective data in data store to the current count
         ds.addData(this.gameObject.name, count.ToString(), true, this);
+    //#Set number display to number, with the prefix and suffix
         text.text = prefix + count + suffix;
     }
 
@@ -37,10 +41,11 @@ public class DataCounter : DataInput {
     public void adjustCount(int amountToChangeBy)
     {
         count += amountToChangeBy; //add input to 'count'
+        if (count < 0) count = (count + 1);
     }
     
     public override void clearData()
     {
-        count = 0;
+        count = defaultCount;
     }
 }
