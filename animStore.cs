@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class animStore : MonoBehaviour
 {
-    [SerializeField] public AnimationClip buttonMashAnim;
+    [SerializeField] public AnimationClip buttonMashAnim; //Used by ButtonMash.cs
 
     // Start is called before the first frame update
     void Start()

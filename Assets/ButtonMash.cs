@@ -21,9 +21,7 @@ public class ButtonMash : MonoBehaviour
     //#Add animation and button component
         this.gameObject.AddComponent<Animation>();
         if (this.gameObject.GetComponent<Button>() == null)
-        {
             this.gameObject.AddComponent<Button>();
-        }
     //#Set Variables
         anim = GetComponent<Animation>();
         animStore = GameObject.Find("AnimationHolder");
@@ -35,7 +33,7 @@ public class ButtonMash : MonoBehaviour
         //#Change Speed
             foreach (AnimationState state in anim)
             {
-                state.speed = 2F;
+                state.speed = 2.3F;
             }
     //#Setup Button
         buttonComp.onClick.AddListener(ButtonPressAnim);
