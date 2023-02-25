@@ -36,6 +36,12 @@ public class FilePicker : MonoBehaviour {
 		ScoutingMenu.SetActive (true);
 	}
 
+	public void unloadMenu()
+	{
+		MainMenu.SetActive(false);
+		FileMenu.SetActive(false);
+	}
+
 	public void Start() {
 	//#Set DS to <DataStorage> component
 		DS = GetComponent<DataStorage>();
@@ -202,5 +208,7 @@ public class FilePicker : MonoBehaviour {
         }
         resultText.text = "Clearing done.";
 		tmpFileName = null;
+	//#Exit Menu
+		unloadMenu();
     }
 }
