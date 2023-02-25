@@ -13,16 +13,19 @@ public class DeviceCamera : MonoBehaviour
     private Texture defaultBackground;
 
     public DataStorage DS;
+
+//#Image
     public GameObject Picture;
-
-
     public RawImage background;
     public AspectRatioFitter fit;
+//
     public GameObject Camera;
 
     public GameObject PhotoTakeButton;
 
     public float FlashWaitTime;
+
+
 
     private void Start()
     {
@@ -99,6 +102,11 @@ public class DeviceCamera : MonoBehaviour
             }
     }
 
+    public void CameraOff()
+    {
+        backCam.Stop();
+    }
+
     public void OnClicked() //function for the button to trigger
     {
     //#Call TakePhoto()
@@ -116,19 +124,19 @@ public class DeviceCamera : MonoBehaviour
     //  {
             string TeamNumber = DS.data["TeamNumber"];
             yield return new WaitForEndOfFrame();
-
+        //#Set up image
             Texture2D photo = new Texture2D(background.texture.width, background.texture.height, TextureFormat.ARGB32, false);
             //background.texture.height = backCam.height;
             //background.texture.width = backCam.width;
             Graphics.CopyTexture(background.texture, photo);
+        //#Apply image
             photo.Apply();
             background.texture = null; //Camera off to give illusion of flash
-
         //#Encode to a PNG
             byte[] bytes = photo.EncodeToPNG();
             Destroy(photo);
         //#Get filepath to push photo to
-            //Get Default filepath
+            //#Get Default filepath
                 string filePath = Application.persistentDataPath + "/" + TeamNumber + ".png";
             //
 
