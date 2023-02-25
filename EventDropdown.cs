@@ -19,7 +19,7 @@ public class EventDropdown : DataInput {
         dropdown.AddOptions(new List<Dropdown.OptionData>() { new Dropdown.OptionData("ERR - Please Sync") });
         //dropdown.AddOptions(new List<Dropdown.OptionData>() { new Dropdown.OptionData("TestCompetition") });//Doesn't work yet
         dropdown.RefreshShownValue();
-    //#Set default data as "ERROR"
+    //#Default data is "ERROR"
         DS.addData("EventKey", "ERROR", true, this);
         DStwo.addData("EventKey", "ERROR", true, this);
     }

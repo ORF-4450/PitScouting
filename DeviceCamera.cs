@@ -101,6 +101,7 @@ public class DeviceCamera : MonoBehaviour
 
     public void OnClicked() //function for the button to trigger
     {
+    //#Call TakePhoto()
         Debug.Log("Clicked!"); //Yay! It clicked correctly!
         StartCoroutine(TakePhoto());
     }
@@ -136,7 +137,8 @@ public class DeviceCamera : MonoBehaviour
                 int maxCount = 1000;
                 for (int i = 1; i < maxCount + 1; i++) //code from DataStore
                 {
-                    string tmpFilePath = Application.persistentDataPath + "/" + TeamNumber + "-" + (maxCount - i + 1) + ".png"; //Try different possibilities until 1000, then give up
+                //#Try different possibilities until 1000, then give up
+                    string tmpFilePath = Application.persistentDataPath + "/" + TeamNumber + "-" + (maxCount - i + 1) + ".png";
                 //#Test filepath against existing files
                     if (!File.Exists(tmpFilePath))
                     {
