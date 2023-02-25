@@ -14,8 +14,8 @@ public class DeviceCamera : MonoBehaviour
 
     public DataStorage DS;
 
+    public GameObject PitMenu;
 //#Image
-    public GameObject Picture;
     public RawImage background;
     public AspectRatioFitter fit;
 //
@@ -94,7 +94,7 @@ public class DeviceCamera : MonoBehaviour
         int orient = -backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0,0,orient);
     //#Camera off when not needed
-            if (Picture.activeSelf == true) //This keeps the camera off when the viewing window is not shown
+            if (PitMenu.activeSelf == true) //This keeps the camera off when the viewing window is not shown
             {
                 backCam.Play();
             } else {
