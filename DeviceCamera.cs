@@ -94,7 +94,7 @@ public class DeviceCamera : MonoBehaviour
         int orient = -backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0,0,orient);
     //#Camera off when not needed
-            if (PitMenu.activeSelf == true) //This keeps the camera off when the viewing window is not shown
+            if (PitMenu.activeSelf) //This keeps the camera off when the viewing window is not shown
             {
                 backCam.Play();
             } else {
