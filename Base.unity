@@ -658,7 +658,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 330}
+  m_AnchoredPosition: {x: 0, y: 490}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &18027892
@@ -1139,10 +1139,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 353756086}
-        m_TargetAssemblyTypeName: SetActiveBulk, Assembly-CSharp
-        m_MethodName: SetState
-        m_Mode: 1
+      - m_Target: {fileID: 1566258820}
+        m_TargetAssemblyTypeName: SidebarStates, Assembly-CSharp
+        m_MethodName: SwitchState
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4865,7 +4865,7 @@ RectTransform:
   - {fileID: 1816296221}
   - {fileID: 1999052742}
   m_Father: {fileID: 1337861536}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -6496,18 +6496,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2104130711}
-        m_TargetAssemblyTypeName: SetActiveBulk, Assembly-CSharp
-        m_MethodName: SetState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 259022429}
         m_TargetAssemblyTypeName: SidebarStates, Assembly-CSharp
         m_MethodName: SwitchState
@@ -6520,10 +6508,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 638572335}
-        m_TargetAssemblyTypeName: DeviceCamera, Assembly-CSharp
-        m_MethodName: CameraOff
-        m_Mode: 1
+      - m_Target: {fileID: 1566258820}
+        m_TargetAssemblyTypeName: SidebarStates, Assembly-CSharp
+        m_MethodName: SwitchState
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6970,7 +6958,7 @@ RectTransform:
   - {fileID: 34344713}
   - {fileID: 956203532}
   m_Father: {fileID: 1337861536}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8469,15 +8457,15 @@ RectTransform:
   m_GameObject: {fileID: 496999649}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.84375, y: 0.84375, z: 0.84375}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1566258819}
-  m_RootOrder: 9
+  m_Father: {fileID: 1626273388}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 640, y: -100}
+  m_AnchoredPosition: {x: 1710, y: 455.625}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &496999651
@@ -9574,15 +9562,15 @@ RectTransform:
   m_GameObject: {fileID: 591259821}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.84375, y: 0.84375, z: 0.84375}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1566258819}
-  m_RootOrder: 8
+  m_Father: {fileID: 1626273388}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 640, y: 380}
+  m_AnchoredPosition: {x: 1710, y: 860.625}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &591259823
@@ -9744,7 +9732,7 @@ RectTransform:
   - {fileID: 1302714565}
   - {fileID: 267740763}
   m_Father: {fileID: 1337861536}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12193,9 +12181,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverBaseURL: https://orf-4450scoutingapp.azurewebsites.net/
   Version:
-  - 2022
+  - 2023
   - 2
-  - 0
+  - 25
   - 
   GoogleForm: {fileID: 768052565}
   dataStorageKey: Stands
@@ -18767,6 +18755,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1626273388}
   - {fileID: 259022426}
   - {fileID: 1566258819}
   - {fileID: 353756085}
@@ -21079,11 +21068,8 @@ RectTransform:
   - {fileID: 1595177892}
   - {fileID: 913275843}
   - {fileID: 971728762}
-  - {fileID: 591259822}
-  - {fileID: 496999650}
-  - {fileID: 1626273388}
   m_Father: {fileID: 1337861536}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -21113,9 +21099,10 @@ MonoBehaviour:
   - {fileID: 1852611549}
   - {fileID: 528142577}
   - {fileID: 733346392}
-  BoolsStateZero: 01000000000000000000
-  BoolsStateOne: 00010100000000000000
-  BoolsStateTwo: 00000001010100000000
+  - {fileID: 1626273387}
+  BoolsStateZero: 0100000000000000000001
+  BoolsStateOne: 0001010000000000000000
+  BoolsStateTwo: 0000000101010000000000
 --- !u!1 &1567620197
 GameObject:
   m_ObjectHideFlags: 0
@@ -21926,7 +21913,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 330}
+  m_AnchoredPosition: {x: 0, y: 490}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1602794977
@@ -22385,24 +22372,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1626273388
-Transform:
+--- !u!224 &1626273388
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1626273387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1386.6666, y: -640, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1851852, y: 1.1851852, z: 1.1851852}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 195891572}
   - {fileID: 1430976135}
   - {fileID: 1904660492}
-  m_Father: {fileID: 1566258819}
-  m_RootOrder: 10
+  - {fileID: 591259822}
+  - {fileID: 496999650}
+  m_Father: {fileID: 1337861536}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -2300, y: -640}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1630249237
 GameObject:
   m_ObjectHideFlags: 0
@@ -23439,9 +23433,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverBaseURL: https://orf-4450scoutingapp.azurewebsites.net/
   Version:
-  - 2022
+  - 2023
   - 2
-  - 0
+  - 25
   - 
   GoogleForm: {fileID: 1705314351}
   dataStorageKey: Pit
@@ -24833,7 +24827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1772804284
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24851,7 +24845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 390}
+  m_AnchoredPosition: {x: 0, y: 490}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1772804285
@@ -28963,7 +28957,7 @@ RectTransform:
   - {fileID: 319990901}
   - {fileID: 1542224243}
   m_Father: {fileID: 1337861536}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
