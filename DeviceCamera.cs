@@ -82,8 +82,10 @@ public class DeviceCamera : MonoBehaviour
 
     private void Update() //Display image from camera every frame
     {
+    //If error, don't proceed
         if(!camAvailable || background.texture != backCam)
         return;
+    //
 
         float ratio = (float)background.texture.width / (float)background.texture.height;
         //fit.aspectRatio = ratio;
@@ -93,7 +95,7 @@ public class DeviceCamera : MonoBehaviour
 
         int orient = -backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0,0,orient);
-    //#Camera off when not needed
+    //#Camera off when pit menu is closed
             if (PitMenu.activeSelf) //This keeps the camera off when the viewing window is not shown
             {
                 backCam.Play();
@@ -118,7 +120,7 @@ public class DeviceCamera : MonoBehaviour
     IEnumerator TakePhoto()  // Start this Coroutine to take the photo
     {
     //#If not playing animation, continue and play animation    
-        if (!PhotoTakeButton.GetComponent<Animation>().IsPlaying("ButtonPressed2")) //Dont take picture if the button is in it's animation.
+        if (!PhotoTakeButton.GetComponent<Animation>().IsPlaying("ButtonPressed2")) //Don't take picture if the button is in it's animation.
         {
             PhotoTakeButton.GetComponent<Animation>().Play("ButtonPressed2"); //Button Animation
     //  {
