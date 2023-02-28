@@ -61,6 +61,7 @@ public class EventTeamData : MonoBehaviour {
 
         if (eventDropdown != null) eventDropdown.refresh();
         if (teamDropdown != null) teamDropdown.refresh();
+        if (teamDropdownTwo != null) teamDropdownTwo.refresh();
     }
 
     public EventData[] getEvents()
