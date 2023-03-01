@@ -11,6 +11,8 @@ public class EventDropdown : DataInput {
     public DataStorage DStwo;
     public EventTeamData ETD;
     public bool testEvent;
+    [SerializeField] TeamDropdown TeamDropdownPit;
+    [SerializeField] TeamDropdown TeamDropdownStands;
 
 	// Use this for initialization
 	void Start () {
