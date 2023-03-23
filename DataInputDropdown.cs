@@ -8,8 +8,8 @@ public class DataInputDropdown : DataInput {
 
     public DataStorage ds;
     public Dropdown dropdown; //Script 'Dropdown' in input GameObject
+
     [SerializeField] private bool OverrideOutputs;
-    [SerializeField] private List<string> InputStrings;
     [SerializeField] private List<string> OutputStrings;
 
     public override void changeData(object change)
@@ -46,19 +46,24 @@ public class DataInputDropdown : DataInput {
         {
             ds.addData(this.gameObject.name, dropdown.captionText.text, true, this);
 
+    //#Override Outputs
+
         } else {
 
-            foreach (string stringInList in InputStrings)
+            foreach (Dropdown.OptionData stringInList in dropdown.options)
             {
-                string output = OutputStrings[InputStrings.IndexOf(stringInList)];
-
-                if (stringInList == dropdown.captionText.text)
+                
+                if (stringInList.text == dropdown.captionText.text)
                 {
+                    string output = OutputStrings[dropdown.options.IndexOf(stringInList)];
+
                     ds.addData(this.gameObject.name, output, true, this);
                 }
+                
                 
             }
 
         }
+    //
     }
 }
