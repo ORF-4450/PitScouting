@@ -4060,6 +4060,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ds: {fileID: 768052562}
   dropdown: {fileID: 0}
+  OverrideOutputs: 0
+  InputStrings: []
+  OutputStrings: []
 --- !u!114 &207257535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11545,6 +11548,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ds: {fileID: 1705314349}
   dropdown: {fileID: 0}
+  OverrideOutputs: 0
+  InputStrings: []
+  OutputStrings: []
 --- !u!114 &740542478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15224,6 +15230,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ds: {fileID: 0}
   dropdown: {fileID: 0}
+  OverrideOutputs: 0
+  InputStrings: []
+  OutputStrings: []
 --- !u!114 &1029402603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20128,6 +20137,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ds: {fileID: 768052562}
   dropdown: {fileID: 0}
+  OverrideOutputs: 0
+  InputStrings: []
+  OutputStrings: []
 --- !u!114 &1532965457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22672,6 +22684,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ds: {fileID: 768052562}
   dropdown: {fileID: 0}
+  OverrideOutputs: 1
+  InputStrings:
+  - None
+  - Docked
+  - Engaged
+  OutputStrings:
+  - 0
+  - 10
+  - 12
 --- !u!114 &1650504964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27159,6 +27180,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ds: {fileID: 768052562}
   dropdown: {fileID: 0}
+  OverrideOutputs: 1
+  InputStrings:
+  - None
+  - In Community
+  - Docked
+  - Engaged
+  OutputStrings:
+  - 0
+  - 2
+  - 6
+  - 10
 --- !u!114 &1952310908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28799,6 +28831,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ds: {fileID: 1705314349}
   dropdown: {fileID: 0}
+  OverrideOutputs: 0
+  InputStrings: []
+  OutputStrings: []
 --- !u!114 &2094530364
 MonoBehaviour:
   m_ObjectHideFlags: 0
