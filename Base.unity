@@ -4061,7 +4061,6 @@ MonoBehaviour:
   ds: {fileID: 768052562}
   dropdown: {fileID: 0}
   OverrideOutputs: 0
-  InputStrings: []
   OutputStrings: []
 --- !u!114 &207257535
 MonoBehaviour:
@@ -10920,7 +10919,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -210}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713105755
 MonoBehaviour:
@@ -11549,7 +11548,6 @@ MonoBehaviour:
   ds: {fileID: 1705314349}
   dropdown: {fileID: 0}
   OverrideOutputs: 0
-  InputStrings: []
   OutputStrings: []
 --- !u!114 &740542478
 MonoBehaviour:
@@ -12164,7 +12162,7 @@ MonoBehaviour:
   Version:
   - 2023
   - 3
-  - 2
+  - 23
   - 
   GoogleForm: {fileID: 768052565}
   dataStorageKey: Stands
@@ -15231,7 +15229,6 @@ MonoBehaviour:
   ds: {fileID: 0}
   dropdown: {fileID: 0}
   OverrideOutputs: 0
-  InputStrings: []
   OutputStrings: []
 --- !u!114 &1029402603
 MonoBehaviour:
@@ -20138,7 +20135,6 @@ MonoBehaviour:
   ds: {fileID: 768052562}
   dropdown: {fileID: 0}
   OverrideOutputs: 0
-  InputStrings: []
   OutputStrings: []
 --- !u!114 &1532965457
 MonoBehaviour:
@@ -22685,10 +22681,6 @@ MonoBehaviour:
   ds: {fileID: 768052562}
   dropdown: {fileID: 0}
   OverrideOutputs: 1
-  InputStrings:
-  - None
-  - Docked
-  - Engaged
   OutputStrings:
   - 0
   - 10
@@ -23409,7 +23401,7 @@ MonoBehaviour:
   Version:
   - 2023
   - 3
-  - 2
+  - 23
   - 
   GoogleForm: {fileID: 1705314351}
   dataStorageKey: Pit
@@ -27181,11 +27173,6 @@ MonoBehaviour:
   ds: {fileID: 768052562}
   dropdown: {fileID: 0}
   OverrideOutputs: 1
-  InputStrings:
-  - None
-  - In Community
-  - Docked
-  - Engaged
   OutputStrings:
   - 0
   - 2
@@ -28832,7 +28819,6 @@ MonoBehaviour:
   ds: {fileID: 1705314349}
   dropdown: {fileID: 0}
   OverrideOutputs: 0
-  InputStrings: []
   OutputStrings: []
 --- !u!114 &2094530364
 MonoBehaviour:

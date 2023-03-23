@@ -60,11 +60,7 @@ public class DataInputDropdown : DataInput {
 
                     ds.addData(this.gameObject.name, output, true, this);
                 }
-                
-                
             }
-
         }
-    //
     }
 }
