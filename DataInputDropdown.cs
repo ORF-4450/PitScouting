@@ -52,10 +52,11 @@ public class DataInputDropdown : DataInput {
 
             foreach (Dropdown.OptionData stringInList in dropdown.options)
             {
+                int i = dropdown.options.IndexOf(stringInList);
                 
                 if (stringInList.text == dropdown.captionText.text)
                 {
-                    string output = OutputStrings[dropdown.options.IndexOf(stringInList)];
+                    string output = OutputStrings[i];
 
                     ds.addData(this.gameObject.name, output, true, this);
                 }
