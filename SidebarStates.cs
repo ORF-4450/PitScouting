@@ -37,8 +37,7 @@ public class SidebarStates : MonoBehaviour
 
         foreach (ObjectList ObjectInList in MenusList[MenuState].ObjectList) //Set game objects to their respective activation booleans in BoolStateList
         {
-            GameObject gameObjectInList = ObjectInList.Object;
-            gameObjectInList.SetActive(ObjectInList.Bool);
+            ObjectInList.Object.SetActive(ObjectInList.Bool);
         }
     }
 }
