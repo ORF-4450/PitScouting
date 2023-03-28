@@ -89,5 +89,6 @@ public class DataStorageEditor : Editor {
             
         GUILayout.EndHorizontal();
         GUILayout.Label (StatusMessage);
-	}
+//
+    }
 }

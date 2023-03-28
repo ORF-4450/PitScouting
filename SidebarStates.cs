@@ -2,13 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ObjectList
+{
+    public GameObject Object;
+    public bool Bool;
+}
+
+[System.Serializable]
+public class Menus
+{
+    public List<ObjectList> ObjectList;
+}
+
 public class SidebarStates : MonoBehaviour
 {
-    [SerializeField] List<GameObject> Objects;
-    [SerializeField] List<bool> BoolsStateZero;
-    [SerializeField] List<bool> BoolsStateOne;
-    [SerializeField] List<bool> BoolsStateTwo;
-    private List<bool> BoolStateList;
+    [SerializeField] List<Menus> MenusList;
 
     // Start is called before the first frame update
     void Start()
@@ -22,30 +31,14 @@ public class SidebarStates : MonoBehaviour
         
     }
 
-    public void SwitchState(int State)
+    public void SwitchState(int MenuState)
     {
-        //Set BoolStateList to...
-            switch (State)
-            {
-                case 0: //...BoolStateZero
-                    BoolStateList = BoolsStateZero;
-                    break;
-                case 1: //...BoolStateOne
-                    BoolStateList = BoolsStateOne;
-                    break;
-                case 2: //...BoolStateTwo
-                    BoolStateList = BoolsStateTwo;
-                    break;
-                default: //Sends error message
-                    Debug.LogError("SwitchState in SidebarStates has received an invalid value");
-                    break;
-            }
         //Set SetActive to corresponding boolean in BoolStateList
 
-
-        foreach (GameObject gameObjectInList in Objects) //Set game objects to their respective activation booleans in BoolStateList
+        foreach (ObjectList ObjectInList in MenusList[MenuState].ObjectList) //Set game objects to their respective activation booleans in BoolStateList
         {
-            gameObjectInList.SetActive(BoolStateList[Objects.IndexOf(gameObjectInList)]);
+            GameObject gameObjectInList = ObjectInList.Object;
+            gameObjectInList.SetActive(ObjectInList.Bool);
         }
     }
 }
