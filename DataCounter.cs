@@ -3,8 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class DataCounter : DataInput {
-
-    public DataStorage ds; //Datastorage script to save count to 
+    
+    public DataStorage ds;
     public string prefix; //String to put before number when displaying
     public string suffix; //String to put after number when displaying
     Text text; //Place to show number
@@ -13,6 +13,7 @@ public class DataCounter : DataInput {
 
     // Use this for initialization
     void Start () {
+        copyValues(ParentObject.GetComponent<DataCounter>());
         count = defaultCount;
     //#Return Error if unknown DataStorage
         if (ds == null)
@@ -47,5 +48,20 @@ public class DataCounter : DataInput {
     public override void clearData()
     {
         count = defaultCount;
+    }
+
+
+    public void copyValues(DataCounter comp)
+    {
+        try
+        {
+            ds = comp.ds;
+            prefix = comp.prefix;
+            suffix = comp.suffix;
+        }   
+        catch
+        {
+            Debug.LogError("Something went wrong");
+        }
     }
 }

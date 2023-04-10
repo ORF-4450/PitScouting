@@ -28,4 +28,6 @@ public class PositionStorage : DataInput
     public string DefaultButtonName = null;
     public string storeName = null;
     public string buttonName = null;
+
+
 }

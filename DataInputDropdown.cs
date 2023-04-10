@@ -9,8 +9,9 @@ public class DataInputDropdown : DataInput {
     public DataStorage ds;
     public Dropdown dropdown; //Script 'Dropdown' in input GameObject
 
-    [SerializeField] private bool OverrideOutputs;
-    [SerializeField] private List<string> OutputStrings;
+    [SerializeField] public bool OverrideOutputs;
+    [SerializeField] public List<string> OutputStrings;
+    [SerializeField] public List<Dropdown.OptionData> dropdownOptions;
 
     public override void changeData(object change)
     {
@@ -38,6 +39,8 @@ public class DataInputDropdown : DataInput {
     void Start()
     {
         dropdown = GetComponent<Dropdown>();
+        copyValues(ParentObject.GetComponent<DataInputDropdown>());
+        dropdown.options = dropdownOptions;
     }
 
     void FixedUpdate()
@@ -63,4 +66,21 @@ public class DataInputDropdown : DataInput {
             }
         }
     }
+
+
+    public void copyValues(DataInputDropdown comp)
+        {
+            try
+            {
+                ds = comp.ds;
+                OverrideOutputs = comp.OverrideOutputs;
+                if (comp.OutputStrings != null)
+                    OutputStrings = comp.OutputStrings;
+                dropdownOptions = comp.dropdownOptions;
+            }
+            catch
+            {
+                Debug.LogError("Something went wrong");
+            }
+        }
 }
