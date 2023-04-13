@@ -4,25 +4,21 @@ using UnityEngine;
 
 public class MenuStructure : MonoBehaviour
 {
-    public string menuJson;
-    public Menu mainMenu;
-    public Test testArray = new Test("test1");
+    public Menu[] menusArray;
+    public Dictionary<string,Menu> menus = new();
 
     public void Start()
     {
-        //menuJson = JsonUtility.ToJson(mainMenu);
-        // mainMenu = deJson(menuJson);
-        //Debug.Log(JsonUtility.ToJson(mainMenu));
-        // Debug.Log(mainMenu.menus[0].menuName);
-        //Debug.Log(JsonUtility.ToJson(testArray));
-        //Debug.Log(JsonUtility.ToJson(new Test("testStringAAAA")));
+        setupDictionary();
     }
-
-
-    public Menu deJson(string menu)
+    
+    public void setupDictionary()
     {
-        return JsonUtility.FromJson<Menu>(menu);
-
+        foreach (Menu menu in menusArray)
+        {
+            menus.Add(menu.menuName, menu);
+            menu.setupDictionary();
+        }
     }
 }
 
@@ -30,33 +26,17 @@ public class MenuStructure : MonoBehaviour
 public class Menu
 {
     public string menuName;
-    public Menu[] menus;
+    public Menu[] menusArray;
     public GameObject[] objects;
-}
 
-[System.Serializable]
-public class Test
-{
-    public string testString;
+    public Dictionary<string,Menu> menus = new();
 
-    public Test(string testString)
+    public void setupDictionary()
     {
-        this.testString = testString;
+        foreach (Menu menu in menusArray)
+        {
+            menus.Add(menu.menuName,menu);
+            menu.setupDictionary();
+        }
     }
 }
-
-
-// class Test
-// {
-//     public Test(float posX, float posY, GameObject parent, InfoObject infoObject) {
-//         this.posX = posX;
-//         this.posY = posY;
-//         this.parent = parent;
-//         this.infoObject = infoObject;
-//     }
-
-//     public float posX = gameObject.transform.position.x;
-//     public float posY = gameObject.transform.position.x;
-//     public GameObject parent = gameObject.transform.Parent;
-//     public InfoObject infoObject = GetComponent<InfoObject>();
-// }
