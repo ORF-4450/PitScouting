@@ -23,6 +23,9 @@ public class DataStorage : MonoBehaviour
     private UnityWebRequest currentUploadRequest;
     public ResultText uploadResultText;
     public ResultText downloadResultText; //LEGACY
+    public FileUpload fileUpload = new();
+
+    public string[] excludedKeys = {"Pre_StartingPos"}; //Skip these in reset phase
 
     private bool lastPingTest = false;
 //Having issues displaying these? Check out DataStorageEditor.cs
@@ -132,34 +135,15 @@ public class DataStorage : MonoBehaviour
 	**/
     public string saveToFile(bool clear)
     {
-        string filePath = Application.persistentDataPath + Path.DirectorySeparatorChar + dataStorageKey + data["TeamNumber"] + ".txt"; //Default path, may need adjusting if duplicate fils
-        if (File.Exists(filePath))
-        {
-        //#Test file names until one is available
-            int maxCount = 1000;
-            for (int i = 1; i < maxCount + 1; i++)
-            {
-                string tmpFilePath = Application.persistentDataPath + Path.DirectorySeparatorChar + dataStorageKey + data["TeamNumber"] + "-" + (maxCount - i + 1) + ".txt"; //Try different possibilities until 1000, then give up
-                if (!File.Exists(tmpFilePath))
-                {
-                    filePath = tmpFilePath;
-                }
-                if (i == maxCount && filePath == Application.persistentDataPath + Path.DirectorySeparatorChar + dataStorageKey + data["TeamNumber"] + ".txt")
-                {
-                    Debug.LogError("Too many files! Couldn't save data, not clearing");
-                    return "error";
-                }
-            }
-        //
-        }
+        string filePath = fileUpload.numberFile(dataStorageKey + data["TeamNumber"], ".txt");
+
         using (StreamWriter sw = File.CreateText(filePath))
         {
-            string[] excluded = {"Pre_StartingPos","Teleop_Climb"}; //idk if this does much anymore
             foreach (KeyValuePair<string, string> kvp in data)
             {
-                if (inputs.ContainsKey(kvp.Key) && clear && !isStaticKey(kvp.Key) && (kvp.Key != excluded[0])) //Clear Function
+                if (inputs.ContainsKey(kvp.Key) && clear && !isStaticKey(kvp.Key) && (!Array.Exists(excludedKeys, element => element == kvp.Key))) //Clear Function
                     inputs[kvp.Key].clearData();
-                sw.WriteLine(kvp.Key + ";" + kvp.Value.Replace(',', 'ǂ').Replace(';', '╕').Replace(':', '╟')); //Encode trouble causing characters to non-trouble causing ones.
+                sw.WriteLine(kvp.Key + ";" + fileUpload.encodeText(kvp.Value)); //Encode trouble causing characters to non-trouble causing ones.
             }
         }
         return filePath;
@@ -232,8 +216,13 @@ public class DataStorage : MonoBehaviour
             if (!(req.result == UnityWebRequest.Result.ProtocolError))
             {
             //#Clear and Retrieve New Data
+            bool hasEventData = GetComponent<EventTeamData>() == null;
+            if (!hasEventData)
                 GetComponent<EventTeamData>().clearData();
-                SyncData data = JsonUtility.FromJson<SyncData>(www.downloadHandler.text);
+
+            SyncData data = JsonUtility.FromJson<SyncData>(www.downloadHandler.text);
+
+            if (!hasEventData)
                 GetComponent<EventTeamData>().loadData(data);
             //#Delete Old Data Files
                 if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "data.json"))
@@ -282,68 +271,20 @@ public class DataStorage : MonoBehaviour
 
             foreach (FileInfo file in dinfo.GetFiles())
             {
-                if (file.Extension.Equals(".txt") && file.Name.Contains(dataStorageKey) && !file.Name.Contains("data")){ //If file is a text file containing scouted data
-
-            //#Format in preparation for GoogleForm.cs
-                Dictionary<string, string> formData = new Dictionary<string, string>();
-                formData["App"] = appName;
-                // Open the stream and read it back.
-                using (StreamReader sr = file.OpenText())
+                if (file.Extension.Equals(".txt") && file.Name.Contains(dataStorageKey) && !file.Name.Contains("data")) //If file is a text file containing scouted data
                 {
-                    string s = "";
-                    while ((s = sr.ReadLine()) != null)
-                    {
-                        Debug.Log(Application.persistentDataPath + "/" + file.Name);
-                        string[] data = s.Split(';');
-                        
-                        uploadResultText.setText(file.Name + ":" + data[0] + " " + data[0]);
-                        if (data[1] == "") data[1] = "empty";
-                        formData[data[0]] = data[1];
-                        Debug.Log(file.Name + ":" + data[0] + " " + data[1]);
-                    }
-                }
+
             //#Send File To GoogleForm.cs
                 Debug.Log("Creating request");
-                //UnityWebRequest uploadRequest = UnityWebRequest.Post(serverBaseURL + "/api/v1/submit.php", formData);
+                Dictionary<string,string> formData = fileUpload.formatData(file, appName, uploadResultText);
                 StartCoroutine(GoogleForm.Post(formData, "entry.1470553737"));
                 Debug.Log("Form upload begun for file " + file.Name);
-
-                //#OLD CODE TO SEND TO SERVER
-                                    /*currentUploadRequest = uploadRequest;
-                                    uploadRequest.chunkedTransfer = false;
-                                    yield return uploadRequest.SendWebRequest();
-                                    Debug.Log(uploadRequest.result);
-                                    if (uploadRequest.result != UnityWebRequest.Result.Success)
-                    {
-                        // Error
-                    }
-                    else
-                    {
-                    }
-                                    Debug.Log(uploadRequest.downloadHandler.text);
-                                    if (!uploadRequest.isHttpError && JsonUtility.FromJson<ValidatorData>(uploadRequest.downloadHandler.text).App == formData["App"])
-                                    {
-                                        file.Delete();
-                                    }
-                                    else
-                                    {
-                                        //if (!uploadRequest.isHttpError) {
-                                        //    Debug.LogError("!uploadRequest.isHttpError");
-                                            //}
-                                        if (!(uploadRequest.responseCode == 200))
-                                        {
-                                            uploadResultText.setText("An error has occured.");
-                                            Debug.LogError("Error uploading file " + file.Name + " Error Code: " + uploadRequest.responseCode);
-                                        }
-                                        continue;
-                                    }*/
-                //
 
                 Debug.Log("Request complete.");
             //#File is Not Scouted Text Data
                 yield return new WaitForSeconds(0.25f);
-                } else {
-                    Debug.Log(file.Name + " Failed Upload");
+                } else if (file.Name.Contains(appName)) {
+                    Debug.Log(appName + ": " + file.Name + " Failed Upload");
                 }
             }
         }
@@ -373,28 +314,58 @@ public class SyncData
     public EventTeamList[] TeamsByEvent;
     public MatchSync[] EventMatches;
 }
-/* LEGACY
-    [System.Serializable]
-    public class ValidatorData //Used http://json2csharp.com/ to generate this.
+
+public class FileUpload
+{
+    public string numberFile(string fileName, string fileExtension)
     {
-        public string App { get; set; }
-        public string Version { get; set; }
-        public string ScouterName { get; set; }
-        public string ScouterTeamNumber { get; set; }
-        public string EventKey { get; set; }
-        public string TeamNumber { get; set; }
-        public string Pre_StartingPos { get; set; }
-        public string Auto_CrossedBaseline { get; set; }
-        public string Auto_Notes { get; set; }
-        public string Auto_PlaceSwitch { get; set; }
-        public string Auto_PlaceScale { get; set; }
-        public string Teleop_ScalePlace { get; set; }
-        public string Teleop_SwitchPlace { get; set; }
-        public string Teleop_ExchangeVisit { get; set; }
-        public string RobotNotes { get; set; }
-        public string Teleop_Climb { get; set; }
-        public string Strategy_PowerUp { get; set; }
-        public string Strategy_General { get; set; }
-        public string NoAlliance { get; set; }
+        string filePath = Application.persistentDataPath + Path.DirectorySeparatorChar + fileName + fileExtension; //Default path, may need adjusting if duplicate fils
+        if (File.Exists(filePath))
+        {
+            int maxCount = 1000;
+            for (int i = 1; i < maxCount + 1; i++)
+            {
+                string tmpFilePath = Application.persistentDataPath + Path.DirectorySeparatorChar + fileName + "-" + (maxCount - i + 1) + fileExtension; //Try different possibilities until 1000, then give up
+                if (!File.Exists(tmpFilePath))
+                {
+                    filePath = tmpFilePath;
+                }
+                if (i == maxCount && filePath == Application.persistentDataPath + Path.DirectorySeparatorChar + fileName + fileExtension)
+                {
+                    Debug.LogError("Too many files! Couldn't save data, not clearing");
+                    return "error";
+                }
+            }
+        }
+
+        return filePath;
     }
-*/
+
+    public string encodeText(string inputString)
+    {
+        return inputString.Replace(',', 'ǂ').Replace(';', '╕').Replace(':', '╟');
+    }
+
+    public Dictionary<string, string> formatData(FileInfo file, string appName, ResultText uploadResultText)
+    {
+        Dictionary<string, string> formData = new Dictionary<string, string>();
+        formData["App"] = appName;
+        // Open the stream and read it back.
+        using (StreamReader sr = file.OpenText())
+        {
+            string s = "";
+            while ((s = sr.ReadLine()) != null)
+            {
+                Debug.Log(Application.persistentDataPath + "/" + file.Name);
+                string[] data = s.Split(';');
+                
+                uploadResultText.setText(file.Name + ":" + data[0] + " " + data[0]);
+                if (data[1] == "") data[1] = "empty";
+                formData[data[0]] = data[1];
+                Debug.Log(file.Name + ":" + data[0] + " " + data[1]);
+            }
+        }
+
+        return formData;
+    }
+}

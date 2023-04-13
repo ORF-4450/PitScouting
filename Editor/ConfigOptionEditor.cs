@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditorInternal;
 
 [CustomEditor(typeof(ConfigurableInput))]
 public class ConfigOptionEditor : Editor
@@ -34,33 +35,36 @@ public class ConfigOptionEditor : Editor
                     GUILayout.Label("UI Label");
                     Script.label = GUILayout.TextField(Script.label);
                 GUILayout.EndHorizontal();
-    //#Buttons
-        //GUILayout.BeginHorizontal();
-        //#Activate On Load
-            Script.activation = GUILayout.Toggle(Script.activation, "Activate on Load");
-        //#Reload Dropdown
-            if (GUILayout.Button("Reload Data Input Dropdown"))
-                reloadData();
-        //GUILayout.EndHorizontal();
-    //#Dropdown
-        //#Create Dropdown
-            EditorGUI.BeginChangeCheck();
-            Script.selectedConfig = EditorGUILayout.Popup("Input Type", Script.selectedConfig, Script.configOptions.Keys.ToArray());
-        //#On Dropdown Value Changed
-            if (EditorGUI.EndChangeCheck())
-            {
-            //#Destroy Children
-                foreach (Transform child in Script.gameObject.transform)
-                    {
-                        if (Application.isPlaying)
-                            Destroy(child.gameObject);
-                        else
-                            DestroyImmediate(child.gameObject);
-                    }
-            //#Create New Children
-                reloadData();
-                Script.Setup();
-            }
+            GUILayout.BeginVertical(); //# Dropdown
+                //#Dropdown
+
+                    //#Create Dropdown
+                        EditorGUI.BeginChangeCheck();
+                        Script.selectedConfig = EditorGUILayout.Popup("Input Type", Script.selectedConfig, Script.configOptions.Keys.ToArray());
+                    //#On Dropdown Value Changed
+                        if (EditorGUI.EndChangeCheck())
+                        {
+                        //#Destroy Children
+                            foreach (Transform child in Script.gameObject.transform)
+                                {
+                                    if (Application.isPlaying)
+                                        Destroy(child.gameObject);
+                                    else
+                                        DestroyImmediate(child.gameObject);
+                                }
+                        //#Create New Children
+                            reloadData();
+                            Script.Setup();
+                        }
+                    //
+                GUILayout.BeginHorizontal();
+                    //#Activate On Load Checkbox
+                        Script.activation = GUILayout.Toggle(Script.activation, "Activate on Load");
+                    //#Reload Dropdown Button
+                            if (GUILayout.Button("Reload Data Input Dropdown"))
+                                reloadData();
+                    GUILayout.EndHorizontal();
+                GUILayout.EndVertical();
         }
 
     }

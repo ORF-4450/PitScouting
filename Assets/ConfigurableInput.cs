@@ -8,13 +8,13 @@ public class ConfigurableInput : MonoBehaviour
 {
     public string dataKey;
     public string label;
+    public List<int> test;
 
     public Dictionary<string,ConfigObj> configOptions = new Dictionary<string, ConfigObj>();
     public int selectedConfig;
     public ConfigurableInputOptions configOptionsScript;
     private List<ConfigurationOption> configOptionsList = new List<ConfigurationOption>();
     public GameObject dataInputObject;
-    //public DataStorage ds;
     public bool activation;
     public Object dataScript;
     public System.Type dataScriptType;
